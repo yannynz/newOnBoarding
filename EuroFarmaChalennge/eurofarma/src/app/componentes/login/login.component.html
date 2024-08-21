@@ -1,0 +1,45 @@
+<!-- login.component.html -->
+<div class="conteudo-pai">
+  <div class="container" #container>
+    <div class="form-container sign-in" *ngIf="isSignIn">
+      <form (ngSubmit)="onLogin()">
+        <h1>Entrar</h1>
+        <input type="email" placeholder="Email" [(ngModel)]="email" name="email">
+        <input type="password" placeholder="Senha" [(ngModel)]="password" name="password">
+        <button type="submit">Entrar</button>
+      </form>
+    </div>
+
+    <div class="form-container sign-up" *ngIf="!isSignIn">
+      <form (ngSubmit)="onRegister()">
+        <h1>Criar conta</h1>
+        <select id="department" name="department" [(ngModel)]="role" name="role" required>
+          <option value="" disabled selected>Departamento</option>
+          <option value="ti">TI</option>
+          <option value="admin">ADM</option>
+          <option value="financeiro">Financeiro</option>
+         </select>
+        <input type="email" placeholder="Email" [(ngModel)]="email" name="email" required>
+        <input type="text" placeholder="Nome" [(ngModel)]="name" name="name" required>
+        <input type="password" placeholder="Senha" [(ngModel)]="password" name="password" required>
+        <button type="submit">Cadastre-se</button>
+    </form>
+
+  </div>
+
+  <div class="toggle-container">
+    <div class="toggle">
+      <div class="toggle-panel toggle-left">
+        <img src="../../../assets/imagens/logo-login.png" alt="Eurofarma">
+        <p>Faça login para continuar usando nossa plataforma.</p>
+        <button (click)="switchToSignIn()" class="toggle-button">Entrar</button>
+      </div>
+      <div class="toggle-panel toggle-right">
+        <img src="../../../assets/imagens/logo-login.png" alt="Eurofarma">
+        <p>Faça o cadastro para aproveitar a nossa plataforma.</p>
+        <button (click)="switchToSignUp()" class="toggle-button">Cadastre-se</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
