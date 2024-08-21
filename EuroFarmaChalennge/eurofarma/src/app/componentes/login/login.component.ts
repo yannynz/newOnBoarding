@@ -52,14 +52,8 @@ export class LoginComponent {
           localStorage.setItem('userRole', userRole);
           console.log('Consegui login');
   
-          // Redirecionamento baseado no papel do usuário
-          if (userRole === 'admin') {
-            this.router.navigate(['/admin-dashboard']);
-          } else if (userRole === 'ti') {
-            this.router.navigate(['/ti-dashboard']);
-          } else if (userRole === 'financeiro') {
-            this.router.navigate(['/financeiro-dashboard']);
-          }
+            this.router.navigate(['/dashboard']);
+        
         },
         error: (error) => {
           console.error('Login failed', error);
