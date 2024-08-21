@@ -38,18 +38,26 @@ export class LoginComponent {
   }
 
   onLogin() {
-    console.log('Tentei login')
+    console.log('Tentei login');
     if (this.email && this.password) {
       this.authService.login(this.email, this.password).subscribe({
         next: (response) => {
-          localStorage.setItem('token', response.token);
-          localStorage.setItem('userType', response.userType);
-
-          if (response.userType === 'admin') {
+          console.log('Resposta do servidor:', response);
+          // Ajuste para refletir os campos retornados
+          const userRole = response.role;
+          const userName = response.name;
+  
+          // Ajuste o armazenamento local conforme necessário
+          localStorage.setItem('userName', userName);
+          localStorage.setItem('userRole', userRole);
+          console.log('Consegui login');
+  
+          // Redirecionamento baseado no papel do usuário
+          if (userRole === 'admin') {
             this.router.navigate(['/admin-dashboard']);
-          } else if (response.userType === 'ti') {
+          } else if (userRole === 'ti') {
             this.router.navigate(['/ti-dashboard']);
-          } else if (response.userType === 'financeiro') {
+          } else if (userRole === 'financeiro') {
             this.router.navigate(['/financeiro-dashboard']);
           }
         },
@@ -60,19 +68,27 @@ export class LoginComponent {
       });
     }
   }
+  
+  
 
   onRegister() {
-    console.log('Tentei cadastro')
+    console.log('Tentei cadastro');
     if (this.email && this.password && this.name && this.role) {
-      this.authService.register(this.email, this.password,this.name, this.role).subscribe({
+      this.authService.register(this.email, this.password, this.name, this.role).subscribe({
         next: (response) => {
-          this.router.navigate(['/login']);
+          // Exibir um alerta de sucesso
+          alert('Cadastro realizado com sucesso!');
+          
+          // Atualizar a página
+          window.location.reload();
         },
         error: (error) => {
           console.error('Registration failed', error);
           // Exibir uma mensagem de erro ao usuário
+          alert('Erro ao realizar o cadastro. Por favor, tente novamente.');
         }
       });
     }
   }
+  
 }

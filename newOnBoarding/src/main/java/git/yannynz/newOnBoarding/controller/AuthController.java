@@ -11,6 +11,7 @@ import java.util.Base64;
 import java.util.Map;
 import java.util.Optional;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
@@ -19,25 +20,35 @@ public class AuthController {
     private UserService userService;
 
     @PostMapping("/register")
-    public ResponseEntity<String> registerUser(@RequestBody User user) {
+    public ResponseEntity<Map<String, String>> registerUser(@RequestBody User user) {
         System.out.println("Register method called");
         if (userService.findByEmail(user.getEmail()).isPresent()) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Email already in use.");
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(Map.of("message", "Email already in use."));
         }
         if (user.getName() == null || user.getEmail() == null || user.getPassword() == null || user.getRole() == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("All fields are required.");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("message", "All fields are required."));
         }
         String hashedPassword = userService.hashPassword(user.getPassword());
         user.setPassword(hashedPassword);
         userService.saveUser(user);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Cadastrado com sucesso");
+        return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("message", "Cadastrado com sucesso"));
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> loginUser(@RequestHeader("Authorization") String authHeader) {
+    public ResponseEntity<?> loginUser(@RequestHeader(value = "Authorization", required = false) String authHeader) {
         System.out.println("Login method called");
 
-        String[] credentials = extractCredentials(authHeader);
+        if (authHeader == null || !authHeader.startsWith("Basic ")) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Authorization header missing or malformed");
+        }
+
+        String[] credentials;
+        try {
+            credentials = extractCredentials(authHeader);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid Authorization header format");
+        }
+
         String email = credentials[0];
         String password = credentials[1];
 
@@ -48,6 +59,7 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
         }
     }
+
 
     private String[] extractCredentials(String authHeader) {
         if (authHeader != null && authHeader.startsWith("Basic ")) {

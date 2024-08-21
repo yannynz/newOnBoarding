@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -8,18 +8,22 @@ import { Observable } from 'rxjs';
 export class AuthService {
 
   // URL do back-end Spring Boot
-  private apiUrl = ''; // Substitua pela URL correta do seu back-end
+  private apiUrl = 'http://localhost:8080'; // Substitua pela URL correta do seu back-end
 
   constructor(private http: HttpClient) {}
 
   // Método para login
   login(email: string, password: string): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/auth/login`, { email, password });
+    const headers = new HttpHeaders({
+      'Authorization': 'Basic ' + btoa(`${email}:${password}`)
+    });
+    return this.http.post<any>(`${this.apiUrl}/auth/login`, {}, { headers });
   }
 
   // Método para cadastro
   register(email: string, password: string, name: string, role: string): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/auth/register`, { email, password, name, role });
+    // Aqui estamos esperando uma resposta de texto
+    return this.http.post<any>(`${this.apiUrl}/auth/register`, { email, password, name, role }, { responseType: 'text' as 'json' });
   }
 
   // Outros métodos relacionados à autenticação, como logout

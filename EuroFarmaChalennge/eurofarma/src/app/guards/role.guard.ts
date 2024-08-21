@@ -8,10 +8,10 @@ export class RoleGuard implements CanActivate {
   constructor(private router: Router) {}
 
   canActivate(route: ActivatedRouteSnapshot): boolean {
-    const userType = localStorage.getItem('userType');
+    const userRole = localStorage.getItem('userRole');
     const requiredRole = route.data['role'] as string;
 
-    if (userType === requiredRole) {
+    if (userRole === requiredRole) {
       return true;
     } else {
       this.router.navigate(['/login']);
