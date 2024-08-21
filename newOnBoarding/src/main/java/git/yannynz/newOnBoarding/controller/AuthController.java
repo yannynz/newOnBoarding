@@ -1,0 +1,62 @@
+package git.yannynz.newOnBoarding.controller;
+
+import git.yannynz.newOnBoarding.model.User;
+import git.yannynz.newOnBoarding.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Base64;
+import java.util.Map;
+import java.util.Optional;
+
+@RestController
+@RequestMapping("/auth")
+public class AuthController {
+
+    @Autowired
+    private UserService userService;
+
+    @PostMapping("/register")
+    public ResponseEntity<String> registerUser(@RequestBody User user) {
+        System.out.println("Register method called");
+        if (userService.findByEmail(user.getEmail()).isPresent()) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Email already in use.");
+        }
+        if (user.getName() == null || user.getEmail() == null || user.getPassword() == null || user.getRole() == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("All fields are required.");
+        }
+        String hashedPassword = userService.hashPassword(user.getPassword());
+        user.setPassword(hashedPassword);
+        userService.saveUser(user);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Cadastrado com sucesso");
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> loginUser(@RequestHeader("Authorization") String authHeader) {
+        System.out.println("Login method called");
+
+        String[] credentials = extractCredentials(authHeader);
+        String email = credentials[0];
+        String password = credentials[1];
+
+        Optional<User> user = userService.findByEmail(email);
+        if (user.isPresent() && userService.checkPassword(password, user.get().getPassword())) {
+            return ResponseEntity.ok(Map.of("name", user.get().getName(), "role", user.get().getRole()));
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+        }
+    }
+
+    private String[] extractCredentials(String authHeader) {
+        if (authHeader != null && authHeader.startsWith("Basic ")) {
+            String base64Credentials = authHeader.substring(6);
+            byte[] decodedBytes = Base64.getDecoder().decode(base64Credentials);
+            String credentials = new String(decodedBytes);
+            return credentials.split(":", 2); // Divide em email e senha
+        } else {
+            throw new IllegalArgumentException("Invalid Authorization header");
+        }
+    }
+}
