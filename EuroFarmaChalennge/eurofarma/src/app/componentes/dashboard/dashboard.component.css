@@ -1,0 +1,140 @@
+.container {
+  width: 100%;
+  font-family: 'Montserrat', sans-serif;
+  padding-top: 180px;
+  padding-bottom: 40px;
+}
+
+.conteudo-pai {
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.conteudo-pai::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50%; /* Ajuste a altura do arco conforme necessário */
+  background-color:  #00488e;
+  border-radius: 50% 50% 0 0; /* Cria o arco voltado para cima */
+  z-index: -1; /* Coloca o arco atrás do conteúdo */
+}
+
+.textos-chamada h1 {
+  font-size: 60px;
+  color: #00488e;
+  padding-bottom: 12px;
+}
+
+.textos-chamada h2 {
+  font-size: 28px;
+  color: #000;
+}
+
+span {
+  color: #ccb506;
+}
+
+.textos-chamada {
+  padding-bottom: 100px;
+  text-align: center;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap; /* Permite que os itens "quebrem" a linha e desçam */
+  gap: 30px; /* Ajuste o espaço entre as cards aqui */
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Espaça o conteúdo para que o botão vá para o final */
+  align-items: center; /* Centraliza o conteúdo horizontalmente */
+  flex: 1 1 calc(25% - 24px); /* Ajuste para levar em conta o gap aumentado */
+  box-sizing: border-box; /* Inclui padding e border no cálculo da largura */
+  max-width: calc(25% - 24px); /* Ajuste para levar em conta o gap aumentado */
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+}
+
+.card h1 {
+  font-size: 25px;
+  background-color: #00488e; /* Cor de fundo azul */
+  color: #fff; /* Cor do texto branco */
+  padding: 10px 20px; /* Espaçamento interno ao redor do texto */
+  border-radius: 60px; /* Bordas arredondadas */
+  text-align: center; /* Centraliza o texto */
+  margin: 0; /* Remove margens padrão */
+}
+
+
+.card h2 {
+  font-size: 20px;
+  text-align: center;
+  color: #00488e;
+  padding-bottom: 10px;
+  padding-top: 15px;
+}
+
+.card p {
+  font-size: 13px;
+  font-weight: 500;
+  padding-bottom: 12px;
+}
+
+.card button {
+  background-color: #00488e;
+  color: #fff;
+  font-size: 12px;
+  padding: 10px 35px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-top: auto; /* Empurra o botão para o final da card */
+  cursor: pointer;
+  width: 160px;
+}
+
+@media (max-width: 1024px) {
+  .card {
+    flex: 1 1 calc(50% - 24px); /* Ajuste para levar em conta o gap aumentado */
+    max-width: calc(50% - 24px); /* Ajuste para levar em conta o gap aumentado */
+  }
+}
+
+@media (max-width: 768px) {
+  .card {
+    flex: 1 1 100%; /* Na tela pequena, cada card ocupará 100% da largura */
+    max-width: 100%;
+  }
+
+  .textos-chamada h1 {
+    font-size: 40px;
+  }
+
+  .textos-chamada h2 {
+    font-size: 18px;
+  }
+
+  .conteudo-pai{
+    height: 100%;
+  }
+
+  .conteudo-pai::before {
+    height: 75%; /* Ajuste a altura do arco conforme necessário */
+    border-radius: 20% 20% 0 0; /* Cria o arco voltado para cima */
+  }
+}
+
+@media (max-width: 1024px) and (max-height: 600px){
+  .conteudo-pai{
+    height: 100%;
+  }
+}

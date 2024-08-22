@@ -9,7 +9,11 @@ export class DashboardComponent implements OnInit {
 
   constructor() { }
 
+  usuarioNome: string = '';
+
   ngOnInit(): void {
+    // Recuperar o nome do usuário armazenado no localStorage
+    this.usuarioNome = localStorage.getItem('userName') || 'Usuário';
   }
 
 }

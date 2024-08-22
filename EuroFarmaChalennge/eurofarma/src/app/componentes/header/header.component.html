@@ -1,1 +1,51 @@
-<p>header works!</p>
+<header class="header-page">
+  <a class="logo" href="/dashboard">
+    <img class="logo-img" src="../../../assets/imagens/eurofarma-logo.png" alt="Eurofarma logo">
+  </a>
+  <nav class="header-menu">
+    <ul class="ul-pc">
+      <li class="li-pc"><a class="a-pc-header a-header" [routerLink]="['/dashboard']">Geral</a></li>
+      <li class="li-pc"><a class="a-pc-header a-header" [routerLink]="[lembretesLink]">Lembretes</a></li>
+      <li class="li-pc"><a class="a-pc-header a-header" [routerLink]="[videosLink]">Vídeos</a></li>
+      <li class="li-pc"><a class="a-pc-header a-header" [routerLink]="[pdfLink]">Pdf</a></li>
+      <li class="li-pc">
+        <a class="a-pc-header a-header" (click)="toggleLogoutPopup()"><i class="fa-regular fa-user"></i></a>
+
+        <!-- Pop-up de logout -->
+        <div *ngIf="showLogoutPopup" class="logout-popup">
+          <button (click)="logout()">Sair</button>
+        </div>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<!-- Menu para celular -->
+<div class="menu-celular">
+  <input type="checkbox" id="chec">
+  <label for="chec" class="label1">
+    <h1 class="botao-menu"><i class="fa-solid fa-bars"></i></h1>
+  </label>
+
+  <nav class="header-celular">
+    <input type="checkbox" id="chec">
+    <label for="chec" class="label2">
+      <h1 class="botao-menu-2"><i class="fa-solid fa-bars"></i></h1>
+    </label>
+
+    <ul class="celular-botoes">
+      <li class="li2 border-bottom"><a class='elemento-header' [routerLink]="['/dashboard']">Geral</a></li>
+      <li class="li2 border-bottom"><a class='elemento-header' [routerLink]="[lembretesLink]">Lembretes</a></li>
+      <li class="li2 border-bottom"><a class='elemento-header' [routerLink]="[videosLink]">Vídeos</a></li>
+      <li class="li2 border-bottom"><a class='elemento-header' [routerLink]="[pdfLink]">Pdf</a></li>
+      <li class="li2 border-bottom">
+        <a class="elemento-header" (click)="toggleLogoutPopup()"><i class="fa-regular fa-user"></i></a>
+
+        <!-- Pop-up de logout -->
+        <div *ngIf="showLogoutPopup" class="logout-popup">
+          <button (click)="logout()">Sair</button>
+        </div>
+      </li>
+    </ul>
+  </nav>
+</div>

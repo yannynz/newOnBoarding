@@ -1,0 +1,216 @@
+.header-page {
+  width: 100%;
+  height: 75px;
+  display: flex;
+  /* vertical */
+  align-items: center;
+
+  /* horizontal */
+  justify-content: center;
+
+  padding: 0 15px;
+
+  /* position: absolute; */
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  overflow: hidden;
+
+  z-index: 99;
+}
+
+.logout-popup {
+  position: absolute;
+  top: 10px; /* Ajuste conforme necessário */
+  right: -50px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+}
+
+.logout-popup button {
+  background-color: #00488e;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.logout-popup button:hover {
+  background-color: #003366;
+}
+
+
+.logo{
+  margin-left: 290px;
+}
+
+.logo-img{
+  width: 150px;
+}
+
+.ul-pc {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  margin-right: 310px;
+}
+
+.li-pc {
+  margin: 0 40px;
+  position: relative;
+  display: flex;
+  cursor: pointer;
+}
+
+.a-pc-header{
+  text-decoration: none;
+  color: #00488e;
+  font-size: 16.5px;
+  margin-top: 14.5px;
+  margin-right: 43px;
+  font-size: 16px;
+  position: relative;
+  font-family: 'Montserrat', sans-serif !important;
+  font-weight: 500;
+}
+
+.a-pc-header:after {
+  content: "";
+  position: absolute;
+  background-color: #00488e;
+  height: 2px;
+  width: 0;
+  left: 0;
+  bottom: -4px;
+  z-index: 99;
+  transition: 0.5s;
+}
+
+.a-pc-header:hover:after {
+  width: 100%;
+}
+
+
+.menu-celular{
+  display: none;
+}
+
+
+@media screen and (max-width: 1040px){
+
+  .logo-img{
+      width: 100px;
+  }
+
+  .menu-celular{
+      display: block;
+  }
+
+  .botao-menu{
+      font-size: 20px;
+      color: #00488e;
+  }
+
+  .botao-menu-2{
+      font-size: 20px;
+      color: #fff;
+  }
+
+  .ul-pc{
+      display: none;
+  }
+
+  .header-page{
+      justify-content: center;
+      padding: 3px !important;
+      height: 63px;
+      z-index: 97;
+  }
+
+/* COMECO MENU CELULAR */
+input[type="checkbox"]{
+  display: none;
+}
+
+.header-celular{
+  background-color: #00488e!important;
+  width: 100% !important;
+  height: 100% !important;
+  position: fixed !important;
+  top: 0;
+  left: -100%;
+  transition: all 0.5s;
+  z-index: 98;
+}
+
+input[type="checkbox"]:checked ~ .header-celular {
+  transform: translateX(100%);
+}
+
+.celular-botoes{
+  list-style: none;
+  margin-top: 150px;
+}
+
+.li2{
+  margin-bottom: 25px;
+  width: 90%;
+  padding-bottom: 10px;
+  font-family: 'Inter', sans-serif !important;
+}
+
+.elemento-header{
+  font-size: 20px !important;
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+}
+
+
+.label1{
+  position: fixed !important;
+  top: 17px;
+  z-index: 97;
+  left: 5%;
+  width: 6.5% !important;
+}
+
+.label2{
+  position: absolute;
+  top: 17px;
+  z-index: 99;
+  left: 5%;
+  width: 4% !important;
+}
+
+.header-menu2{
+  position: absolute;
+}
+
+.logout-popup {
+  position: absolute;
+  top: 70%; /* Ajuste conforme necessário */
+  right: 75%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+}
+
+}
+
+@media screen and (max-width: 1400px){
+  .header-page{
+      justify-content: center !important;
+      padding: 3px !important;
+      height: 63px;
+      z-index: 97;
+  }
+
+  .logo{
+      margin-left: 0;
+  }
+
+  .ul-pc{
+      margin-right: 0;
+  }
+}

@@ -9,12 +9,21 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
   @ViewChild('container') container!: ElementRef;
-  isSignIn: boolean = true; // True for sign-in mode, false for sign-up mode
+  isSignIn: boolean = true;
 
   email: string = '';
   password: string = '';
   name: string = '';
   role: string = '';
+
+  registrationError: boolean = false;
+  registrationErrorMessage: string = '';
+
+  loginError: boolean = false;
+  loginErrorMessage: string = '';
+
+  registrationSuccess: boolean = false;
+  registrationSuccessMessage: string = '';
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -38,51 +47,47 @@ export class LoginComponent {
   }
 
   onLogin() {
-    console.log('Tentei login');
+    this.loginError = false; // Resetar o erro de login
     if (this.email && this.password) {
       this.authService.login(this.email, this.password).subscribe({
         next: (response) => {
-          console.log('Resposta do servidor:', response);
-          // Ajuste para refletir os campos retornados
           const userRole = response.role;
           const userName = response.name;
-  
-          // Ajuste o armazenamento local conforme necessário
+
           localStorage.setItem('userName', userName);
           localStorage.setItem('userRole', userRole);
-          console.log('Consegui login');
-  
-            this.router.navigate(['/dashboard']);
-        
+          localStorage.setItem('token', response.token);
+
+          this.router.navigate(['/dashboard']);
         },
         error: (error) => {
-          console.error('Login failed', error);
-          // Exibir uma mensagem de erro ao usuário
+          this.loginError = true;
+          this.loginErrorMessage = 'Usuário inexistente ou senha incorreta. Por favor, tente novamente.';
         }
       });
     }
   }
-  
-  
 
   onRegister() {
-    console.log('Tentei cadastro');
+    this.registrationError = false; // Resetar o erro de registro
     if (this.email && this.password && this.name && this.role) {
       this.authService.register(this.email, this.password, this.name, this.role).subscribe({
-        next: (response) => {
-          // Exibir um alerta de sucesso
-          alert('Cadastro realizado com sucesso!');
-          
-          // Atualizar a página
-          window.location.reload();
+        next: () => {
+          this.registrationSuccess = true;
+          this.registrationSuccessMessage = 'Cadastro feito com sucesso, faça login.';
+          this.isSignIn = true;
+          this.updateContainerClass();
         },
         error: (error) => {
-          console.error('Registration failed', error);
-          // Exibir uma mensagem de erro ao usuário
-          alert('Erro ao realizar o cadastro. Por favor, tente novamente.');
+          this.registrationError = true;
+          this.loginError = false;
+          if (error.status === 409) {
+            this.registrationErrorMessage = 'O e-mail já está em uso. Por favor, escolha outro.';
+          } else {
+            this.registrationErrorMessage = 'Erro ao realizar o cadastro. Por favor, tente novamente.';
+          }
         }
       });
     }
   }
-  
 }

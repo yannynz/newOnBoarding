@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,19 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'eurofarma';
+  showHeader: boolean = true;
+  showFooter: boolean = true;
+
+  constructor(private router: Router) {
+    // Subscrição para detectar mudanças na rota
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        // Condicional para exibir/esconder o cabeçalho dependendo da rota
+        this.showHeader = !['/login'].includes(event.url);
+        this.showFooter = !['/login'].includes(event.url);
+      }
+    });
+  }
+
+
 }

@@ -20,6 +20,7 @@ import { AdminPdfsComponent } from './componentes/roles/admin-pdfs/admin-pdfs.co
 import { FinanceiroVideosComponent } from './componentes/roles/financeiro-videos/financeiro-videos.component';
 import { FinanceiroLembretesComponent } from './componentes/roles/financeiro-lembretes/financeiro-lembretes.component';
 import { FinanceiroPdfsComponent } from './componentes/roles/financeiro-pdfs/financeiro-pdfs.component';
+import { FooterComponent } from './componentes/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { FinanceiroPdfsComponent } from './componentes/roles/financeiro-pdfs/fin
     FinanceiroVideosComponent,
     FinanceiroLembretesComponent,
     FinanceiroPdfsComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
