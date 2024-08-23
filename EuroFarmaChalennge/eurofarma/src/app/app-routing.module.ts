@@ -33,7 +33,17 @@ const routes: Routes = [
   { path: 'financeiro-pdfs', component: FinanceiroPdfsComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'financeiro' } },
   { path: 'financeiro-videos', component: FinanceiroVideosComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'financeiro' } },
 
-  { path: '', redirectTo: '/login', pathMatch: 'full' }
+  // Rota raiz com lógica de redirecionamento
+  {
+    path: '',
+    canActivate: [AuthGuard],
+    children: [
+      { path: '', redirectTo: '/dashboard', pathMatch: 'full' }, // Redireciona para o dashboard se autenticado
+    ]
+  },
+
+  // Rota de fallback caso o usuário não esteja autenticado
+  { path: '**', redirectTo: '/login', pathMatch: 'full' } // Redireciona para login se não autenticado ou rota inválida
 ];
 
 

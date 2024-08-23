@@ -21,6 +21,7 @@ import { FinanceiroVideosComponent } from './componentes/roles/financeiro-videos
 import { FinanceiroLembretesComponent } from './componentes/roles/financeiro-lembretes/financeiro-lembretes.component';
 import { FinanceiroPdfsComponent } from './componentes/roles/financeiro-pdfs/financeiro-pdfs.component';
 import { FooterComponent } from './componentes/footer/footer.component';
+import { ChatbotComponent } from './componentes/chatbot/chatbot.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { FooterComponent } from './componentes/footer/footer.component';
     FinanceiroLembretesComponent,
     FinanceiroPdfsComponent,
     FooterComponent,
+    ChatbotComponent,
   ],
   imports: [
     BrowserModule,

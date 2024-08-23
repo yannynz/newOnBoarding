@@ -6,6 +6,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
+  isAuthenticated() {
+    throw new Error('Method not implemented.');
+  }
 
   // URL do back-end Spring Boot
   private apiUrl = 'http://localhost:8080'; // Substitua pela URL correta do seu back-end
