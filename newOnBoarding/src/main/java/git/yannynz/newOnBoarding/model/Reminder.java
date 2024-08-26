@@ -1,5 +1,6 @@
 package git.yannynz.newOnBoarding.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference; // Adicionar import
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,6 +26,7 @@ public class Reminder {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonBackReference // Evita recursão infinita
     private User user;
 
     public Reminder() {}

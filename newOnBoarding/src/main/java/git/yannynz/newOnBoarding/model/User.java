@@ -1,7 +1,6 @@
 package git.yannynz.newOnBoarding.model;
 
-import java.util.List;
-
+import com.fasterxml.jackson.annotation.JsonManagedReference; // Adicionar import
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,6 +9,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -32,10 +33,19 @@ public class User {
     private String role;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Reminder> reminders;
+    @JsonManagedReference // Evita recursão infinita
+    private List<Reminder> reminders = new ArrayList<>();
 
-    public User(Long userId) {}
+    // Construtor padrão vazio
+    public User() {
+    }
 
+    // Construtor com id (não recomendado sem propósito)
+    public User(Long userId) {
+        this.id = userId;
+    }
+
+    // Construtor sem id (recomendado para criação de novos objetos)
     public User(String email, String encodedPassword, String name, String role) {
         this.email = email;
         this.password = encodedPassword;
@@ -43,6 +53,7 @@ public class User {
         this.role = role;
     }
 
+    // Getters e Setters
     public Long getId() {
         return id;
     }

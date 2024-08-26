@@ -15,12 +15,9 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable()) // Desativa a proteção CSRF, se necessário
                 .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers("/api/reminders/**").permitAll() // Permite acesso aos endpoints de reminder
                         .requestMatchers("/auth/**").permitAll() // Permite acesso aos endpoints de autenticação
                         .anyRequest().authenticated() // Requer autenticação para qualquer outra solicitação
-                )
-                .formLogin(formLogin -> formLogin
-                        .loginPage("/login") // Página de login personalizada, se necessário
-                        .permitAll()
                 )
                 .logout(logout -> logout
                         .permitAll()

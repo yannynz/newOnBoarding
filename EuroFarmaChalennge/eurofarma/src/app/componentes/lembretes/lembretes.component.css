@@ -1,0 +1,67 @@
+.container {
+  margin-top: 200px;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+}
+
+.add-reminder, .edit-reminder, .reminder-list {
+  margin-bottom: 20px;
+}
+
+form {
+  display: flex;
+  flex-wrap: wrap; /* Permite que os cartões fiquem lado a lado */
+  gap: 20px; /* Espaçamento entre os cartões */
+}
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: calc(50% - 20px); /* Ajuste o valor conforme necessário */
+  box-sizing: border-box;
+}
+
+.card h2 {
+  margin-top: 0;
+}
+
+.card input, .card textarea {
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+.card button {
+  margin-top: 10px;
+}
+
+.reminder-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.reminder-list li {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.reminder-list button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.reminder-list i {
+  font-size: 1.2em;
+}

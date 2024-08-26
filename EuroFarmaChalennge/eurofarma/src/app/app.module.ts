@@ -12,16 +12,14 @@ import { RoleGuard } from './guards/role.guard';
 import { DashboardComponent } from './componentes/dashboard/dashboard.component';
 import { HeaderComponent } from './componentes/header/header.component';
 import { TiVideosComponent } from './componentes/roles/ti-videos/ti-videos.component';
-import { TiLembretesComponent } from './componentes/roles/ti-lembretes/ti-lembretes.component';
 import { TiPdfsComponent } from './componentes/roles/ti-pdfs/ti-pdfs.component';
 import { AdminVideosComponent } from './componentes/roles/admin-videos/admin-videos.component';
-import { AdminLembretesComponent } from './componentes/roles/admin-lembretes/admin-lembretes.component';
 import { AdminPdfsComponent } from './componentes/roles/admin-pdfs/admin-pdfs.component';
 import { FinanceiroVideosComponent } from './componentes/roles/financeiro-videos/financeiro-videos.component';
-import { FinanceiroLembretesComponent } from './componentes/roles/financeiro-lembretes/financeiro-lembretes.component';
 import { FinanceiroPdfsComponent } from './componentes/roles/financeiro-pdfs/financeiro-pdfs.component';
 import { FooterComponent } from './componentes/footer/footer.component';
 import { ChatbotComponent } from './componentes/chatbot/chatbot.component';
+import { LembretesComponent } from './componentes/lembretes/lembretes.component';
 
 @NgModule({
   declarations: [
@@ -30,16 +28,14 @@ import { ChatbotComponent } from './componentes/chatbot/chatbot.component';
     DashboardComponent,
     HeaderComponent,
     TiVideosComponent,
-    TiLembretesComponent,
     TiPdfsComponent,
     AdminVideosComponent,
-    AdminLembretesComponent,
     AdminPdfsComponent,
     FinanceiroVideosComponent,
-    FinanceiroLembretesComponent,
     FinanceiroPdfsComponent,
     FooterComponent,
     ChatbotComponent,
+    LembretesComponent
   ],
   imports: [
     BrowserModule,

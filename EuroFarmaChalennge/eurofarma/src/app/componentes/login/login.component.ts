@@ -53,10 +53,12 @@ export class LoginComponent {
         next: (response) => {
           const userRole = response.role;
           const userName = response.name;
+          const userId = response.id; // Certifique-se de que o ID do usuário é retornado
 
           localStorage.setItem('userName', userName);
           localStorage.setItem('userRole', userRole);
           localStorage.setItem('token', response.token);
+          localStorage.setItem('userId', userId); // Armazenar o userId
 
           this.router.navigate(['/dashboard']);
         },

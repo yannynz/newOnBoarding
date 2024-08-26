@@ -1,18 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { LembretesComponent } from './lembretes.component';
 
-import { TiLembretesComponent } from './ti-lembretes.component';
-
-describe('TiLembretesComponent', () => {
-  let component: TiLembretesComponent;
-  let fixture: ComponentFixture<TiLembretesComponent>;
+describe('LembretesComponent', () => {
+  let component: LembretesComponent;
+  let fixture: ComponentFixture<LembretesComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TiLembretesComponent ]
+      declarations: [ LembretesComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(TiLembretesComponent);
+    fixture = TestBed.createComponent(LembretesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

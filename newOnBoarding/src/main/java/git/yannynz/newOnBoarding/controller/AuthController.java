@@ -54,7 +54,14 @@ public class AuthController {
 
         Optional<User> user = userService.findByEmail(email);
         if (user.isPresent() && userService.checkPassword(password, user.get().getPassword())) {
-            return ResponseEntity.ok(Map.of("name", user.get().getName(), "role", user.get().getRole()));
+            User loggedInUser = user.get();
+            // Adiciona o userId à resposta
+            return ResponseEntity.ok(Map.of(
+                    "id", loggedInUser.getId(),
+                    "name", loggedInUser.getName(),
+                    "role", loggedInUser.getRole(),
+                    "token", "some-generated-token" // Supondo que você gere um token
+            ));
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
         }
