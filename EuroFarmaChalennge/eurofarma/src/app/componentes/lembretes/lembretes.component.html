@@ -1,60 +1,54 @@
 <div class="conteudo-pai">
   <div class="container">
     <h1>Meus Lembretes</h1>
+  <div class="add-reminder">
+    <form (ngSubmit)="addReminder()">
+      <div class="card1">
+        <h2>Novo Lembrete</h2>
+        <label for="title">Título:</label>
+        <input type="text" id="title" [(ngModel)]="newReminder.title" name="title" required />
 
-    <div class="add-reminder">
-      <h2>Adicionar Novo Lembrete</h2>
-      <form (ngSubmit)="addReminder()">
-        <div class="card">
-          <label for="title">Título:</label>
-          <input type="text" id="title" [(ngModel)]="newReminder.title" name="title" required>
-        </div>
-
-        <div class="card">
-          <label for="description">Descrição:</label>
-          <textarea id="description" [(ngModel)]="newReminder.description" name="description" required></textarea>
-        </div>
+        <label for="description">Descrição:</label>
+        <textarea id="description" [(ngModel)]="newReminder.description" name="description" required></textarea>
 
         <button type="submit">Adicionar Lembrete</button>
-      </form>
-    </div>
+      </div>
+    </form>
+  </div>
 
-    <div *ngIf="editingReminder" class="edit-reminder">
-      <h2>Editar Lembrete</h2>
-      <form (ngSubmit)="updateReminder()">
+  <div class="reminder-list">
+    <div *ngFor="let reminder of reminders" class="reminder-item">
+      <!-- Se o lembrete estiver sendo editado, mostrar o formulário de edição -->
+      <div *ngIf="editingReminder?.id === reminder.id; else viewMode">
         <div class="card">
-          <label for="edit-title">Título:</label>
-          <input type="text" id="edit-title" [(ngModel)]="editingReminder.title" name="edit-title" required>
-        </div>
+          <form (ngSubmit)="updateReminder()">
+            <h2>Editar Lembrete</h2>
+            <label for="edit-title">Título:</label>
+            <input type="text" id="edit-title" [(ngModel)]="editingReminder!.title" name="edit-title" required>
 
+            <label for="edit-description">Descrição:</label>
+            <textarea id="edit-description" [(ngModel)]="editingReminder!.description" name="edit-description" required></textarea>
+
+            <button type="submit">Salvar</button>
+            <button type="button" (click)="editingReminder = null">Cancelar</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Modo de visualização normal -->
+      <ng-template #viewMode>
         <div class="card">
-          <label for="edit-description">Descrição:</label>
-          <textarea id="edit-description" [(ngModel)]="editingReminder.description" name="edit-description" required></textarea>
+          <h3>{{ reminder.title }}</h3>
+          <p>{{ reminder.description }}</p>
+          <button class="btn-cima" (click)="editReminder(reminder)">
+            <i class="fa fa-edit"></i>
+          </button>
+          <button (click)="deleteReminder(reminder.id!)">
+            <i class="fa fa-trash"></i>
+          </button>
         </div>
-
-        <button type="submit">Atualizar Lembrete</button>
-        <button type="button" (click)="editingReminder = null">Cancelar</button>
-      </form>
-    </div>
-
-    <div class="reminder-list">
-      <h2>Lista de Lembretes</h2>
-      <ul>
-        <li *ngFor="let reminder of reminders">
-          <div>
-            <h3>{{ reminder.title }}</h3>
-            <p>{{ reminder.description }}</p>
-          </div>
-          <div>
-            <button (click)="editReminder(reminder)">
-              <i class="fa fa-edit"></i>
-            </button>
-            <button (click)="deleteReminder(reminder.id!)">
-              <i class="fa fa-trash"></i>
-            </button>
-          </div>
-        </li>
-      </ul>
+      </ng-template>
     </div>
   </div>
+</div>
 </div>
