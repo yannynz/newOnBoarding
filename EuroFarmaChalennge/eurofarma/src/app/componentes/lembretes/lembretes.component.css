@@ -29,7 +29,7 @@ h1 {
   color: #00488e;
 }
 
-h2 {
+h2, h3{
   font-size: 23px;
   padding-bottom: 10px;
 }
@@ -151,6 +151,10 @@ button {
   }
   .card {
     width: 100%; /* Faz o card ocupar 100% da largura */
+  }
+
+  .btn-lembrete{
+    width: 100%;
   }
 }
 
