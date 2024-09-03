@@ -3,6 +3,7 @@
   min-height: 100vh;
   position: relative;
   overflow: hidden;
+  font-family: 'Montserrat', sans-serif !important;
 }
 
 .conteudo-pai::before {

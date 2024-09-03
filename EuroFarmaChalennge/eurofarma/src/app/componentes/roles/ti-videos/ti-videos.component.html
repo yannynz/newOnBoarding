@@ -1,4 +1,27 @@
 <div class="conteudo-pai">
-    <!-- conteudo iria aqui ---->
+  <h1 class="h1-fora">Vídeos</h1>
+  <div class="container">
+    <!-- Lista de Vídeos -->
+    <div class="video-list">
+      <div *ngFor="let video of videos" class="video-item" (click)="selectVideo(video)">
+        <div class="thumb" [style.backgroundImage]="'url(' + video.thumbUrl + ')'"></div>
+        <div class="video-info">
+          <h3>{{ video.title }}</h3>
+          <p>Eurofarma - TI</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Vídeo Selecionado -->
+    <div class="selected-video" *ngIf="selectedVideoUrl">
+      <div class="thumb-large">
+        <!-- Iframe para o vídeo selecionado -->
+        <iframe [src]="selectedVideoUrl" width="100%" height="315" frameborder="0" allowfullscreen></iframe>
+      </div>
+      <div class="video-info-large">
+        <h3 class="select-h3">{{ selectedVideo?.title }}</h3>
+        <p>Eurofarma - TI</p>
+      </div>
+    </div>
   </div>
-  
+</div>

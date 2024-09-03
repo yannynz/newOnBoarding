@@ -35,7 +35,7 @@
 }
 
 span {
-  color: #ccb506;
+  color: #e6c50e;
 }
 
 .textos-chamada {
@@ -64,7 +64,7 @@ span {
 
 .card h1 {
   font-size: 25px;
-  background-color: #00488e; /* Cor de fundo azul */
+  background-color: #00448e; /* Cor de fundo azul */
   color: #fff; /* Cor do texto branco */
   padding: 10px 20px; /* Espaçamento interno ao redor do texto */
   border-radius: 60px; /* Bordas arredondadas */
@@ -85,21 +85,6 @@ span {
   font-size: 13px;
   font-weight: 500;
   padding-bottom: 12px;
-}
-
-.card button {
-  background-color: #00488e;
-  color: #fff;
-  font-size: 12px;
-  padding: 10px 35px;
-  border: 1px solid transparent;
-  border-radius: 8px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  margin-top: auto; /* Empurra o botão para o final da card */
-  cursor: pointer;
-  width: 160px;
 }
 
 @media (max-width: 1024px) {

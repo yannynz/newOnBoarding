@@ -1,1 +1,77 @@
 @import url('../../../shared-background.css');
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: stretch; /* Alinha os itens para terem a mesma altura */
+  gap: 20px;
+  padding-top: 45px;
+}
+
+.video-list, .selected-video {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+  padding: 25px;
+  flex: 1; /* Faz com que ambos os containers ocupem o mesmo espaço */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centraliza verticalmente o conteúdo */
+}
+
+.video-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  padding: 10px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.video-item:hover{
+  background-color: #d7e9fa;
+}
+
+.thumb {
+  width: 120px;
+  height: 70px;
+  margin-right: 10px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 5px;
+}
+
+.thumb-large {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9; /* Mantém a proporção da miniatura grande */
+  margin-bottom: 15px;
+}
+
+.select-h3{
+  font-size: 22px !important;
+  margin-bottom: 4px !important;
+}
+
+.video-info, .video-info-large {
+  display: flex;
+  flex-direction: column;
+}
+
+.video-info h3, .video-info-large h3 {
+  margin: 0;
+  font-size: 16px;
+  color: #333333;
+}
+
+.video-info p, .video-info-large p {
+  margin: 0;
+  font-size: 14px;
+  color: #666666;
+}
+
+.h1-fora{
+  text-align: center;
+  padding-top: 20px;
+  color: #00448e;
+  font-size: 35px;
+}

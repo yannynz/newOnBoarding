@@ -20,6 +20,7 @@ import { FinanceiroPdfsComponent } from './componentes/roles/financeiro-pdfs/fin
 import { FooterComponent } from './componentes/footer/footer.component';
 import { ChatbotComponent } from './componentes/chatbot/chatbot.component';
 import { LembretesComponent } from './componentes/lembretes/lembretes.component';
+import { SafeUrlPipe } from './safe-url.pipe';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { LembretesComponent } from './componentes/lembretes/lembretes.component'
     FinanceiroPdfsComponent,
     FooterComponent,
     ChatbotComponent,
-    LembretesComponent
+    LembretesComponent,
+    SafeUrlPipe
   ],
   imports: [
     BrowserModule,
