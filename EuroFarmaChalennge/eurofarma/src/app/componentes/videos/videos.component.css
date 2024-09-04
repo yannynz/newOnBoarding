@@ -1,4 +1,4 @@
-@import url('../../../shared-background.css');
+@import url('../../shared-background.css');
 .container {
   display: flex;
   justify-content: center;
@@ -74,4 +74,22 @@
   padding-top: 20px;
   color: #00448e;
   font-size: 35px;
+}
+
+@media (max-width: 1024px){
+  .container{
+    flex-direction: column-reverse;
+  }
+
+  .selected-video, .video-list{
+    margin-bottom: 10px;
+  }
+
+  .h1-fora{
+    font-size: 22px;
+  }
+
+  .video-info-large h3{
+    font-size: 18px !important;
+  }
 }

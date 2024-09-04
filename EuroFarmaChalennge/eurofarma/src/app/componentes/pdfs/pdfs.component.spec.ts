@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TiVideosComponent } from './ti-videos.component';
+import { PdfsComponent } from './pdfs.component';
 
-describe('TiVideosComponent', () => {
-  let component: TiVideosComponent;
-  let fixture: ComponentFixture<TiVideosComponent>;
+describe('PdfsComponent', () => {
+  let component: PdfsComponent;
+  let fixture: ComponentFixture<PdfsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TiVideosComponent ]
+      declarations: [ PdfsComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(TiVideosComponent);
+    fixture = TestBed.createComponent(PdfsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

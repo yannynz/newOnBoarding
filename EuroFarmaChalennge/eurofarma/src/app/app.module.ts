@@ -11,16 +11,12 @@ import { AuthGuard } from './guards/auth.guard';
 import { RoleGuard } from './guards/role.guard';
 import { DashboardComponent } from './componentes/dashboard/dashboard.component';
 import { HeaderComponent } from './componentes/header/header.component';
-import { TiVideosComponent } from './componentes/roles/ti-videos/ti-videos.component';
-import { TiPdfsComponent } from './componentes/roles/ti-pdfs/ti-pdfs.component';
-import { AdminVideosComponent } from './componentes/roles/admin-videos/admin-videos.component';
-import { AdminPdfsComponent } from './componentes/roles/admin-pdfs/admin-pdfs.component';
-import { FinanceiroVideosComponent } from './componentes/roles/financeiro-videos/financeiro-videos.component';
-import { FinanceiroPdfsComponent } from './componentes/roles/financeiro-pdfs/financeiro-pdfs.component';
 import { FooterComponent } from './componentes/footer/footer.component';
 import { ChatbotComponent } from './componentes/chatbot/chatbot.component';
 import { LembretesComponent } from './componentes/lembretes/lembretes.component';
 import { SafeUrlPipe } from './safe-url.pipe';
+import { VideosComponent } from './componentes/videos/videos.component';
+import { PdfsComponent } from './componentes/pdfs/pdfs.component';
 
 @NgModule({
   declarations: [
@@ -28,16 +24,12 @@ import { SafeUrlPipe } from './safe-url.pipe';
     LoginComponent,
     DashboardComponent,
     HeaderComponent,
-    TiVideosComponent,
-    TiPdfsComponent,
-    AdminVideosComponent,
-    AdminPdfsComponent,
-    FinanceiroVideosComponent,
-    FinanceiroPdfsComponent,
     FooterComponent,
     ChatbotComponent,
     LembretesComponent,
-    SafeUrlPipe
+    SafeUrlPipe,
+    VideosComponent,
+    PdfsComponent
   ],
   imports: [
     BrowserModule,

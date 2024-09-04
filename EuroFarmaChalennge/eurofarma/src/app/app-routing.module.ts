@@ -3,12 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
 import { RoleGuard } from './guards/role.guard';
 import { LoginComponent } from './componentes/login/login.component';
-import { AdminPdfsComponent } from './componentes/roles/admin-pdfs/admin-pdfs.component';
-import { AdminVideosComponent } from './componentes/roles/admin-videos/admin-videos.component';
-import { TiPdfsComponent } from './componentes/roles/ti-pdfs/ti-pdfs.component';
-import { TiVideosComponent } from './componentes/roles/ti-videos/ti-videos.component';
-import { FinanceiroPdfsComponent } from './componentes/roles/financeiro-pdfs/financeiro-pdfs.component';
-import { FinanceiroVideosComponent } from './componentes/roles/financeiro-videos/financeiro-videos.component';
+import { PdfsComponent } from './componentes/pdfs/pdfs.component';
+import { VideosComponent } from './componentes/videos/videos.component';
 import { DashboardComponent } from './componentes/dashboard/dashboard.component';
 import { LembretesComponent } from './componentes/lembretes/lembretes.component';
 
@@ -19,15 +15,9 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'lembretes', component: LembretesComponent, canActivate: [AuthGuard] },
 
-  // Rotas específicas para cada role
-  { path: 'admin-pdfs', component: AdminPdfsComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'admin' } },
-  { path: 'admin-videos', component: AdminVideosComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'admin' } },
-
-  { path: 'ti-pdfs', component: TiPdfsComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ti' } },
-  { path: 'ti-videos', component: TiVideosComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ti' } },
-
-  { path: 'financeiro-pdfs', component: FinanceiroPdfsComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'financeiro' } },
-  { path: 'financeiro-videos', component: FinanceiroVideosComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'financeiro' } },
+  // Rotas para PDFs e Vídeos, filtrando com base na role
+  { path: 'pdfs', component: PdfsComponent, canActivate: [AuthGuard] },
+  { path: 'videos', component: VideosComponent, canActivate: [AuthGuard] },
 
   // Rota raiz com lógica de redirecionamento
   {
@@ -41,7 +31,6 @@ const routes: Routes = [
   // Rota de fallback caso o usuário não esteja autenticado
   { path: '**', redirectTo: '/login', pathMatch: 'full' } // Redireciona para login se não autenticado ou rota inválida
 ];
-
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

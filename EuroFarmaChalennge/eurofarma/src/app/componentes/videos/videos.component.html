@@ -7,7 +7,7 @@
         <div class="thumb" [style.backgroundImage]="'url(' + video.thumbUrl + ')'"></div>
         <div class="video-info">
           <h3>{{ video.title }}</h3>
-          <p>Eurofarma - TI</p>
+          <p>Eurofarma - {{ role | titlecase }}</p>
         </div>
       </div>
     </div>
@@ -20,7 +20,7 @@
       </div>
       <div class="video-info-large">
         <h3 class="select-h3">{{ selectedVideo?.title }}</h3>
-        <p>Eurofarma - TI</p>
+        <p>Eurofarma - {{ role | titlecase }}</p>
       </div>
     </div>
   </div>
