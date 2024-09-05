@@ -1,1 +1,29 @@
-<p>pdfs works!</p>
+<div class="conteudo-pai">
+  <h1 class="h1-fora">Pdfs</h1>
+  <div class="container">
+    <!-- Lista de PDFs -->
+    <div class="pdf-list">
+      <div *ngFor="let pdf of pdfs" class="pdf-item" (click)="selectPdf(pdf)">
+        <div class="thumb">
+          <i class="fa-regular fa-file-pdf"></i>
+        </div>
+        <div class="pdf-info">
+          <h3>{{ pdf.title }}</h3>
+          <p>Eurofarma - {{ role | titlecase }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PDF Selecionado -->
+    <div class="selected-pdf" *ngIf="selectedPdfUrl">
+      <div class="pdf-large">
+        <!-- Iframe para o PDF selecionado -->
+        <iframe [src]="selectedPdfUrl" width="100%" height="315" frameborder="0"></iframe>
+      </div>
+      <div class="pdf-info-large">
+        <h3 class="select-h3">{{ selectedPdf?.title }}</h3>
+        <button class="btn-download" *ngIf="selectedPdf?.url" (click)="downloadPdf(selectedPdf?.url!)">Baixar PDF</button>
+      </div>
+    </div>
+  </div>
+</div>

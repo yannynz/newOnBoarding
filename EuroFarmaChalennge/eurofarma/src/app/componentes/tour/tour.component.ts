@@ -21,7 +21,7 @@ export class TourComponent implements OnInit {
     { type: 'video', content: 'assets/videos/Header.mp4', description: 'Header', details: 'No header você tem acesso a todas as funcionalidades do site.' },
     { type: 'video', content: 'assets/videos/Lembretes2.mp4', description: 'Lembretes', details: 'Gerencie lembretes que te auxiliam no dia a dia.' },
     { type: 'video', content: 'assets/videos/Videos.mp4', description: 'Vídeos', details: 'Visualize e exiba vídeos para treinamento do seu cargo.' },
-    { type: 'video', content: 'assets/videos/Videos.mp4', description: 'Pdfs', details: 'Visualize e exiba Pdfs para treinamento do seu cargo.' }
+    { type: 'video', content: 'assets/videos/Pdfs.mp4', description: 'Pdfs', details: 'Visualize e exiba Pdfs para treinamento do seu cargo.' }
   ];
 
   currentStep = 0;
@@ -63,5 +63,5 @@ export class TourComponent implements OnInit {
         }
       });
     }
-  }  
+  }
 }
