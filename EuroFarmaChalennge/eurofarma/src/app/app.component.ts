@@ -15,8 +15,8 @@ export class AppComponent {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         // Condicional para exibir/esconder o cabeçalho dependendo da rota
-        this.showHeader = !['/login'].includes(event.url);
-        this.showFooter = !['/login'].includes(event.url);
+        this.showHeader = !['/login', '/tour'].includes(event.url);
+        this.showFooter = !['/login', '/tour'].includes(event.url);
       }
     });
   }

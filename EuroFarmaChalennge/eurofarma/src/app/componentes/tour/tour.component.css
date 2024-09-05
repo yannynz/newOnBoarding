@@ -1,0 +1,174 @@
+.conteudo-principal {
+    min-height: 100vh;
+    background-color: #00366B;
+    font-family: 'Montserrat', sans-serif !important;
+}
+
+.container {
+    width: 100%;
+    text-align: center;
+    padding-top: 100px;
+    min-height: 100vh;
+    padding-bottom: 50px;
+}
+
+.carousel {
+    position: relative;
+    width: 80%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.slide {
+    display: none;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.slide.active {
+    display: block;
+    opacity: 1;
+}
+
+img {
+    width: 27%;
+    border-radius: 10px;
+}
+
+h1 {
+    color: #fff;
+    font-size: 38px;
+    margin-top: 20px;
+}
+
+p {
+    color: #fff;
+    font-size: 18px;
+}
+
+.botoes {
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+    margin-bottom: 80px;
+}
+
+button {
+    background-color: #ffffff;
+    color: #00448e;
+    font-size: 12px;
+    padding: 10px 45px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.indicators {
+    text-align: center;
+    margin: 10px 0;
+}
+
+.indicator {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin: 0 5px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid #fff;
+}
+
+.indicator.active {
+    background-color: #00448e;
+}
+
+.concluir-a {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 16.5px;
+    margin-top: 14.5px;
+    position: relative;
+}
+
+.concluir-a:after {
+    content: "";
+    position: absolute;
+    background-color: #ffffff;
+    height: 2px;
+    width: 0;
+    left: 0;
+    bottom: -4px;
+    z-index: 99;
+    transition: 0.5s;
+}
+
+.concluir-a:hover:after {
+    width: 100%;
+}
+
+a:hover{
+    text-decoration: none;
+}
+
+a{
+    color: #00448e;
+}
+
+video {
+    width: 28%;
+    border-radius: 10px;
+    display: block;
+    margin: 0 auto;
+}
+
+.btns {
+    margin-right: 60px !important;
+}
+
+@media (max-width: 600px) {
+    .botoes {
+        display: block;
+        margin-top: 10px;
+    }
+
+    video {
+        width: 80%;
+    }
+
+    img {
+        width: 60%;
+    }
+
+    .btns {
+        margin-right: 0 !important;
+        margin-bottom: 20px;
+    }
+
+    .indicators {
+        margin-top: 20px !important;
+    }
+
+    .indicator {
+        margin-right: 10px !important;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    p {
+        font-size: 14px;
+    }
+
+    .botoes {
+        margin-bottom: 30px;
+    }
+
+    .container {
+        padding-top: 40px;
+    }
+}

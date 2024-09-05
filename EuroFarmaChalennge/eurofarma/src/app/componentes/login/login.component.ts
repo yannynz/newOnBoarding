@@ -45,30 +45,48 @@ export class LoginComponent {
       containerElement.classList.add('active');
     }
   }
-
+  
   onLogin() {
     this.loginError = false; // Resetar o erro de login
+    
     if (this.email && this.password) {
       this.authService.login(this.email, this.password).subscribe({
         next: (response) => {
+          console.log('Login response:', response);
+  
+          // Verificar se a função saveUserData está sendo chamada
+          this.authService.saveUserData(response);
+  
           const userRole = response.role;
           const userName = response.name;
-          const userId = response.id; // Certifique-se de que o ID do usuário é retornado
-
+          const userId = response.id;
+          const firstAccess = response.firstAccess !== undefined ? response.firstAccess : false;
+  
+          // Atualiza o localStorage com os dados do usuário
           localStorage.setItem('userName', userName);
           localStorage.setItem('userRole', userRole);
           localStorage.setItem('token', response.token);
-          localStorage.setItem('userId', userId); // Armazenar o userId
-
-          this.router.navigate(['/dashboard']);
+          localStorage.setItem('userId', userId);
+          localStorage.setItem('firstAccess', firstAccess.toString());
+          console.log('firstAccess:', firstAccess);
+  
+          // Se o firstAccess é true, redirecione para /tour, caso contrário, para /dashboard
+          if (firstAccess) {
+            this.router.navigate(['/tour']);
+          } else {
+            this.router.navigate(['/dashboard']);
+          }
         },
         error: (error) => {
+          console.error('Login error:', error);
           this.loginError = true;
           this.loginErrorMessage = 'Usuário inexistente ou senha incorreta. Por favor, tente novamente.';
         }
       });
     }
   }
+  
+  
 
   onRegister() {
     this.registrationError = false; // Resetar o erro de registro
@@ -77,6 +95,7 @@ export class LoginComponent {
         next: () => {
           this.registrationSuccess = true;
           this.registrationSuccessMessage = 'Cadastro feito com sucesso, faça login.';
+          this.loginError = false;
           this.isSignIn = true;
           this.updateContainerClass();
         },

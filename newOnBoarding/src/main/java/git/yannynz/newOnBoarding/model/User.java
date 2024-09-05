@@ -32,6 +32,10 @@ public class User {
     @Column(nullable = false)
     private String role;
 
+    @Column(nullable = false)
+    private boolean firstAccess = true; // Adicionado o campo FirstAccess
+
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference // Evita recursão infinita
     private List<Reminder> reminders = new ArrayList<>();
@@ -54,6 +58,14 @@ public class User {
     }
 
     // Getters e Setters
+    public boolean isFirstAccess() {
+        return firstAccess;
+    }
+
+    public void setFirstAccess(boolean firstAccess) {
+        this.firstAccess = firstAccess;
+    }
+
     public Long getId() {
         return id;
     }

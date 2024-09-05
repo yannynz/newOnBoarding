@@ -7,6 +7,7 @@ import { PdfsComponent } from './componentes/pdfs/pdfs.component';
 import { VideosComponent } from './componentes/videos/videos.component';
 import { DashboardComponent } from './componentes/dashboard/dashboard.component';
 import { LembretesComponent } from './componentes/lembretes/lembretes.component';
+import { TourComponent } from './componentes/tour/tour.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -14,6 +15,7 @@ const routes: Routes = [
   // Rota do dashboard geral acessível para todos os usuários autenticados
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'lembretes', component: LembretesComponent, canActivate: [AuthGuard] },
+  { path: 'tour', component: TourComponent, canActivate: [AuthGuard] },
 
   // Rotas para PDFs e Vídeos, filtrando com base na role
   { path: 'pdfs', component: PdfsComponent, canActivate: [AuthGuard] },

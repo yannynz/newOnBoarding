@@ -18,9 +18,11 @@ export class DashboardComponent implements OnInit {
     this.definirSaudacao();
   }
 
+  
+
   definirSaudacao(): void {
     const horaAtual = new Date().getHours();
-    if (horaAtual < 12) {
+    if (horaAtual < 13) {
       this.saudacao = 'Bom dia';
     } else if (horaAtual < 18) {
       this.saudacao = 'Boa tarde';
@@ -28,4 +30,6 @@ export class DashboardComponent implements OnInit {
       this.saudacao = 'Boa noite';
     }
   }
+
+
 }

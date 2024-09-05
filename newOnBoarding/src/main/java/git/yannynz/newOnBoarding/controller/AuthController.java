@@ -55,17 +55,41 @@ public class AuthController {
         Optional<User> user = userService.findByEmail(email);
         if (user.isPresent() && userService.checkPassword(password, user.get().getPassword())) {
             User loggedInUser = user.get();
+            System.out.println("First Access: " + loggedInUser.isFirstAccess());
             // Adiciona o userId à resposta
             return ResponseEntity.ok(Map.of(
                     "id", loggedInUser.getId(),
                     "name", loggedInUser.getName(),
                     "role", loggedInUser.getRole(),
-                    "token", "some-generated-token" // Supondo que você gere um token
+                    "token", "some-generated-token",
+                    "firstAccess", loggedInUser.isFirstAccess() // Adicione isso
             ));
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
         }
     }
+
+    // Novo endpoint para atualizar o firstAccess
+    @PutMapping("/{id}/firstAccess")
+    public ResponseEntity<String> updateFirstAccess(@PathVariable Long id, @RequestBody Map<String, Boolean> body) {
+        Optional<User> userOpt = userService.findById(id);
+        System.out.println("Update method called");
+
+        if (userOpt.isPresent()) {
+            User user = userOpt.get();
+            Boolean firstAccess = body.get("firstAccess");
+            if (firstAccess != null) {
+                user.setFirstAccess(firstAccess);
+                userService.saveUser(user);
+                return ResponseEntity.ok("First access updated successfully");
+            } else {
+                return ResponseEntity.badRequest().body("Invalid request body");
+            }
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+        }
+    }
+
 
 
     private String[] extractCredentials(String authHeader) {

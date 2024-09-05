@@ -1,0 +1,42 @@
+<div class="conteudo-principal">
+    <div class="container">
+        <div class="carousel">
+            <div class="slide" *ngFor="let step of steps; let i = index" [ngClass]="{'active': i === currentStep}">
+                <!-- Renderiza imagem ou vídeo baseado no tipo -->
+                <div *ngIf="i === currentStep">
+                    <ng-container [ngSwitch]="step.type">
+                        <!-- Imagem -->
+                        <img *ngSwitchCase="'image'" [src]="step.content" alt="{{ step.description }}" />
+                    
+                        <!-- Vídeo -->
+                        <video *ngSwitchCase="'video'"
+                               [src]="step.content"
+                               autoplay muted loop 
+                               playsinline
+                               [style.display]="i === currentStep ? 'block' : 'none'">
+                        </video>
+                    </ng-container>
+                    <h1>{{ step.description }}</h1>
+                    <p>{{ step.details }}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botões de navegação e indicadores -->
+        <div class="botoes" *ngIf="currentStep < steps.length - 1">
+            <button class="btns" (click)="prevStep()">Anterior</button>
+            <div class="indicators">
+                <span class="indicator btns" [ngClass]="{'active': currentStep === 0}"></span>
+                <span class="indicator btns" [ngClass]="{'active': currentStep > 0 && currentStep < steps.length - 1}"></span>
+                <span class="indicator btns" [ngClass]="{'active': currentStep === steps.length - 1}"></span>
+            </div>
+            <button (click)="nextStep()">Próximo</button>
+        </div>
+
+        <div class="final-message" *ngIf="currentStep === steps.length - 1">
+            <button><a href="#" (click)="finishTour()">Concluir Tour</a></button>
+          </div>
+          
+        <a href="#" (click)="finishTour()" class="concluir-a" *ngIf="currentStep < steps.length - 1">Concluir Tour</a>
+          
+</div>

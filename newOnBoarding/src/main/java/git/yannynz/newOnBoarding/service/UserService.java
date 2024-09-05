@@ -40,5 +40,9 @@ public class UserService {
         User user = new User(email, encodedPassword, name, role);
         return userRepository.save(user);
     }
+
+    public Optional<User> findById(Long id) {
+        return userRepository.findById(id);
+    }
 }
 
