@@ -7,11 +7,11 @@
                     <ng-container [ngSwitch]="step.type">
                         <!-- Imagem -->
                         <img *ngSwitchCase="'image'" [src]="step.content" alt="{{ step.description }}" />
-                    
+
                         <!-- Vídeo -->
                         <video *ngSwitchCase="'video'"
                                [src]="step.content"
-                               autoplay muted loop 
+                               autoplay muted loop
                                playsinline
                                [style.display]="i === currentStep ? 'block' : 'none'">
                         </video>
@@ -34,9 +34,9 @@
         </div>
 
         <div class="final-message" *ngIf="currentStep === steps.length - 1">
-            <button><a href="#" (click)="finishTour()">Concluir Tour</a></button>
+            <a class="btn-concluir" href="#" (click)="finishTour()">Concluir Tour</a>
           </div>
-          
+
         <a href="#" (click)="finishTour()" class="concluir-a" *ngIf="currentStep < steps.length - 1">Concluir Tour</a>
-          
+
 </div>
