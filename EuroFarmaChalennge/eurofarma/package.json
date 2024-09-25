@@ -19,6 +19,7 @@
     "@angular/platform-browser-dynamic": "^14.0.0",
     "@angular/router": "^14.0.0",
     "aos": "^2.3.4",
+    "chart.js": "^4.4.4",
     "ng-animate": "^2.0.1",
     "ngx-scrollreveal": "^3.0.0",
     "rxjs": "~7.5.0",

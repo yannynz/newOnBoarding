@@ -1,0 +1,23 @@
+.dashboard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    margin-top: 200px;
+}
+
+.panel {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.chart-container {
+    width: 30%; /* Ajuste conforme necessário */
+    height: 300px; /* Defina uma altura para o gráfico */
+}
+
+.total-users {
+    text-align: center;
+    width: 30%; /* Ajuste conforme necessário */
+}
