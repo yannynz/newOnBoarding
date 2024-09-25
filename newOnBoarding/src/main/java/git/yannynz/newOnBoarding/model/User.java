@@ -1,6 +1,6 @@
 package git.yannynz.newOnBoarding.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference; // Adicionar import
+import git.yannynz.newOnBoarding.model.Feedback; 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,6 +11,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonManagedReference; // Adicionar import
 
 @Entity
 @Table(name = "users")
@@ -32,13 +33,17 @@ public class User {
     @Column(nullable = false)
     private String role;
 
-    @Column(nullable = false)
+    @Column(name = "first_access")
     private boolean firstAccess = true; // Adicionado o campo FirstAccess
 
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference // Evita recursão infinita
     private List<Reminder> reminders = new ArrayList<>();
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference // Evita recursão infinita
+ 
+    private List<Feedback> feedbacks = new ArrayList<>();
 
     // Construtor padrão vazio
     public User() {
@@ -112,5 +117,13 @@ public class User {
 
     public void setReminders(List<Reminder> reminders) {
         this.reminders = reminders;
+    }
+
+    public void setFeedbacks(List<Feedback> feedbacks) {
+    this.feedbacks = feedbacks;
+    }
+
+    public List<Feedback> getFeedbacks() {
+    return feedbacks;
     }
 }
