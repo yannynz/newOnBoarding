@@ -161,6 +161,33 @@ span {
   }
 }
 
+@media (max-width: 1350px){
+/* Modal Content */
+.modal-content {
+  padding: 13px;
+}
+
+/* Ajuste o espaço para o texto e imagem */
+.modal-text {
+  flex: 1; /* Permite que o texto ocupe o espaço disponível */
+  margin-right: 0; /* Adiciona um espaço à direita do texto */
+}
+
+.modal-text h2 {
+  font-size: 20px;
+}
+
+.modal-text p {
+  font-size: 13px;
+  width: 100%;
+}
+
+.modal-image {
+  display: none;
+}
+
+}
+
 @media (max-width: 768px) {
   .card {
     flex: 1 1 100%; /* Na tela pequena, cada card ocupará 100% da largura */
@@ -170,7 +197,7 @@ span {
   .textos-chamada h1 {
     font-size: 40px;
   }
-
+  
   .textos-chamada h2 {
     font-size: 18px;
   }

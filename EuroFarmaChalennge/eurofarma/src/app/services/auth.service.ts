@@ -58,5 +58,9 @@ export class AuthService {
   updateFirstAccess(userId: number, firstAccess: boolean): Observable<any> {
     return this.http.put(`${this.apiUrl}/auth/${userId}/firstAccess`, { firstAccess });
   }
+
+  updateFirstAccess2(userId: number, firstAccess2: boolean): Observable<any> {
+    return this.http.put(`${this.apiUrl}/auth/user/${userId}/firstAccess2`, { firstAccess2 });
+  }
   
 }
