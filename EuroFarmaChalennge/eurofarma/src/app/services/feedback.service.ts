@@ -28,6 +28,10 @@ export class FeedbackService {
   getFeedbackCountByStars(): Observable<any> {
     return this.http.get(`${this.apiUrl}/count-by-stars`);
   }
+
+  getUserCountByRoles(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/count-by-roles`);
+}
 }
 
 

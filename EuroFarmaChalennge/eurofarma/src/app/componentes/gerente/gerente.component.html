@@ -1,15 +1,21 @@
-<div class="dashboard">
-    <div class="panel">
-        <div class="chart-container">
+<div class="conteudo-pai">
+    <div class="textos-chamada">
+        <h1>{{ saudacao }}, {{ usuarioNome }}!</h1>
+        <h2>Seja bem-vindo ao Gerencial <span>Eurofarma</span>.</h2>
+    </div>
 
-            <canvas id="ratingsChart"></canvas>
-        </div>
-        <div class="total-users">
-            <h2>Total de Usuários</h2>
-            <p>{{ totalUsers }}</p>
-        </div>
-        <div class="chart-container">
-            <canvas id="rolesChart"></canvas>
+    <div class="dashboard">
+        <div class="panel container">
+            <div class="chart-container">
+                <canvas id="ratingsChart"></canvas>
+            </div>
+            <div class="total-users">
+                <h2>Total de Usuários</h2>
+                <p class="p-usuarios">{{ totalUsers }}</p>
+            </div>
+            <div class="chart-container">
+                <canvas id="rolesChart"></canvas>
+            </div>
         </div>
     </div>
 </div>

@@ -1,23 +1,126 @@
+.conteudo-pai {
+    padding-top: 170px;
+    text-align: center;
+}
+
+.textos-chamada h1 {
+    font-size: 60px;
+    color: #00488e;
+    padding-bottom: 12px;
+}
+
+.textos-chamada h2 {
+    font-size: 28px;
+    color: #000;
+}
+
+span {
+    color: #e6c50e;
+}
+
 .dashboard {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: center; /* Centraliza o conteúdo */
+    align-items: flex-start; /* Alinha os itens no topo */
     padding: 20px;
-    margin-top: 200px;
+    margin-top: 120px;
 }
 
 .panel {
     display: flex;
-    justify-content: space-between;
+    justify-content: center; /* Centraliza os itens */
+    flex-wrap: wrap; /* Permite que os itens se movam para a próxima linha */
+    align-items: flex-start; /* Alinha os itens no topo */
     width: 100%;
+    margin: 0 auto; /* Centraliza o painel */
 }
 
 .chart-container {
     width: 30%; /* Ajuste conforme necessário */
-    height: 300px; /* Defina uma altura para o gráfico */
+    height: 200px; /* Defina uma altura para o gráfico */
+    margin: 10px; /* Margem entre os gráficos */
 }
 
 .total-users {
     text-align: center;
     width: 30%; /* Ajuste conforme necessário */
+    margin: 10px; /* Margem entre total-users */
+}
+
+.p-usuarios {
+    font-size: 30px;
+    background-color: #00448e;
+    color: #fff;
+    width: 100px;
+    margin: 40px auto; /* Centraliza verticalmente */
+    border-radius: 70px;
+    padding: 10px 0; /* Adicionado padding para melhor apresentação */
+}
+
+/* Media Queries para Ajustes em Telas Menores */
+@media (max-width: 820px) {
+    .dashboard {
+        display: block; /* Alterado para block */
+        padding: 10px; /* Ajustado o padding para mobile */
+    }
+
+    .panel {
+        flex-direction: column; /* Coloca os itens em coluna */
+        align-items: center; /* Centraliza os itens verticalmente */
+        width: 90%; /* Faz com que o painel ocupe 100% da largura */
+        margin-left: 10px;
+    }
+
+    .chart-container {
+        width: 100%; /* Faz com que o gráfico ocupe 100% da largura */
+        height: 150px; /* Ajuste a altura conforme necessário */
+        margin: 10px auto; /* Centraliza o gráfico dentro do container */
+        margin-bottom: 20px; /* Espaçamento entre gráficos */
+    }
+
+    .total-users {
+        width: 100%; /* Faz com que a total-users ocupe 100% da largura */
+        margin-bottom: 60px;
+        margin-top: 60px;
+        margin-left: 0;
+    }
+
+    .p-usuarios {
+        font-size: 30px; /* Reduzido para uma melhor legibilidade em mobile */
+        width: 120px; /* Permite que a largura seja dinâmica */
+        padding: 8px 0; /* Adicionado padding para melhor apresentação */
+    }
+
+    .textos-chamada h1 {
+        font-size: 36px; /* Tamanho reduzido para mobile */
+    }
+
+    .textos-chamada h2 {
+        font-size: 20px; /* Tamanho reduzido para mobile */
+    }
+}
+
+/* Media Queries específicas para Tablets */
+@media (min-width: 821px) and (max-width: 1024px) {
+    .chart-container {
+        width: 45%; /* Ajusta a largura para 45% em tablets, para permitir dois itens por linha */
+        margin: 10px; /* Centraliza o gráfico dentro do container */
+    }
+
+    .total-users {
+        width: 45%; /* Ajusta a largura para 45% em tablets */
+        margin: 10px; /* Centraliza o total-users */
+    }
+}
+
+/* Tela grande (Desktop) */
+@media (min-width: 1025px) {
+    .panel {
+        flex-direction: row; /* Mantém a direção em linha */
+        justify-content: space-between; /* Espaça os itens */
+    }
+
+    .chart-container, .total-users {
+        width: 30%; /* Mantém a largura para 30% em telas grandes */
+    }
 }

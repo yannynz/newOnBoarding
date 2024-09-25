@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Chart, registerables } from 'chart.js'; // Importa todos os componentes do Chart.js
+import { Chart, registerables } from 'chart.js';
 import { FeedbackService } from 'src/app/services/feedback.service';
+import { AuthService } from 'src/app/services/auth.service'; // Importe o AuthService
 
-Chart.register(...registerables); // Registra todos os componentes necessários
+Chart.register(...registerables);
 
 @Component({
   selector: 'app-gerente',
@@ -11,20 +12,22 @@ Chart.register(...registerables); // Registra todos os componentes necessários
 })
 export class GerenteComponent implements OnInit {
 
-  totalUsers: number = 100; // Exemplo de total de usuários
+  totalUsers: number = 0; // Inicializa total de usuários como 0
   ratings: number[] = [0, 0, 0, 0, 0]; // Inicializa as avaliações (1 a 5 estrelas)
-  rolesCount: number[] = [40, 30, 30]; // Exemplo de contagem de roles (Admin, TI, Financeiro)
+  rolesCount: { [key: string]: number } = {}; // Inicializa a contagem de roles como um objeto
+  usuarioNome: string = '';
+  saudacao: string = '';
 
-  private ratingsChart: Chart | undefined; // Armazena a instância do gráfico de avaliações
-  private rolesChart: Chart | undefined; // Armazena a instância do gráfico de roles
+  private ratingsChart: Chart | undefined;
+  private rolesChart: Chart | undefined;
 
-  constructor(private feedbackService: FeedbackService) {}
+  constructor(private feedbackService: FeedbackService, private authService: AuthService) {} // Injete o AuthService
 
   ngOnInit(): void {
-    this.getFeedbackCountByStars(); // Chama o método para obter as contagens
-    setTimeout(() => {
-      this.createCharts();
-    }, 0);
+    this.usuarioNome = localStorage.getItem('userName') || 'Usuário';
+    this.definirSaudacao();
+    this.getFeedbackCountByStars(); // Obtém as contagens de feedbacks
+    this.getUserCountByRoles(); // Obtém a contagem de usuários por roles
   }
 
   getFeedbackCountByStars(): void {
@@ -35,6 +38,22 @@ export class GerenteComponent implements OnInit {
       },
       (error) => {
         console.error('Erro ao obter contagem de feedbacks por estrelas:', error);
+      }
+    );
+  }
+
+  getUserCountByRoles(): void {
+    this.feedbackService.getUserCountByRoles().subscribe(
+      (data) => {
+        this.rolesCount = data; // Armazena a contagem de roles
+
+        // Calcula o total de usuários somando as contagens de roles
+        this.totalUsers = Object.values(this.rolesCount).reduce((acc, count) => acc + count, 0);
+        
+        this.createCharts(); // Atualiza os gráficos após obter os dados
+      },
+      (error) => {
+        console.error('Erro ao obter contagem de usuários por roles:', error);
       }
     );
   }
@@ -54,7 +73,7 @@ export class GerenteComponent implements OnInit {
         datasets: [{
           label: 'Avaliações',
           data: this.ratings,
-          backgroundColor: 'rgba(75, 192, 192, 0.6)',
+          backgroundColor: 'rgba(241, 220, 22, 0.6)',
         }]
       },
       options: {
@@ -76,11 +95,11 @@ export class GerenteComponent implements OnInit {
     this.rolesChart = new Chart(rolesCtx, {
       type: 'bar',
       data: {
-        labels: ['Admin', 'TI', 'Financeiro'],
+        labels: Object.keys(this.rolesCount), // Usa as keys das roles
         datasets: [{
           label: 'Quantidade de Roles',
-          data: this.rolesCount,
-          backgroundColor: 'rgba(153, 102, 255, 0.6)',
+          data: Object.values(this.rolesCount), // Usa os values das roles
+          backgroundColor: 'rgba(0, 68, 142, 0.6)',
         }]
       },
       options: {
@@ -91,5 +110,17 @@ export class GerenteComponent implements OnInit {
         }
       }
     });
+  }
+
+
+  definirSaudacao(): void {
+    const horaAtual = new Date().getHours();
+    if (horaAtual < 13) {
+      this.saudacao = 'Bom dia';
+    } else if (horaAtual < 18) {
+      this.saudacao = 'Boa tarde';
+    } else {
+      this.saudacao = 'Boa noite';
+    }
   }
 }

@@ -7,6 +7,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -43,6 +46,18 @@ public class UserService {
 
     public Optional<User> findById(Long id) {
         return userRepository.findById(id);
+    }
+
+    public Map<String, Integer> getUserCountByRoles() {
+        List<User> users = userRepository.findAll();
+        Map<String, Integer> roleCount = new HashMap<>();
+
+        for (User user : users) {
+            String role = user.getRole();
+            roleCount.put(role, roleCount.getOrDefault(role, 0) + 1);
+        }
+
+        return roleCount;
     }
 }
 

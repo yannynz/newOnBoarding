@@ -63,5 +63,13 @@ public class FeedbackController {
         Map<Integer, Integer> starCount = feedbackService.getFeedbackCountByStars();
         return ResponseEntity.ok(starCount);
     }
+
+    @GetMapping("/count-by-roles")
+    public ResponseEntity<Map<String, Integer>> getUserCountByRoles() {
+        System.out.println("getUserCountByRoles called"); // Verificação de chamada do método
+        Map<String, Integer> roleCount = userService.getUserCountByRoles();
+        System.out.println("Role count retrieved: " + roleCount); // Verificando a contagem de roles
+        return ResponseEntity.ok(roleCount);
+    }
 }
 
