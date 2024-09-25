@@ -1,4 +1,4 @@
-git/yannynz/newOnBoarding/repository/FeedbackRepository.class
-git/yannynz/newOnBoarding/model/Feedback.class
-git/yannynz/newOnBoarding/controller/FeedbackController.class
-git/yannynz/newOnBoarding/service/FeedbackService.class
+git\yannynz\newOnBoarding\repository\FeedbackRepository.class
+git\yannynz\newOnBoarding\controller\FeedbackController.class
+git\yannynz\newOnBoarding\model\Feedback.class
+git\yannynz\newOnBoarding\service\FeedbackService.class

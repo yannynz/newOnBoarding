@@ -29,10 +29,12 @@ export class AuthService {
     localStorage.setItem('userId', user.id); 
     localStorage.setItem('token', user.token); 
     localStorage.setItem('firstAccess', user.firstAccess.toString()); 
+    localStorage.setItem('firstAccess2', user.firstAccess2.toString()); // Adicionando firstAccess2
     console.log('User data saved:', {
       userId: user.id,
       token: user.token,
-      firstAccess: user.firstAccess
+      firstAccess: user.firstAccess,
+      firstAcces2: user.firstAccess2
     });
   }
   
@@ -58,9 +60,4 @@ export class AuthService {
   updateFirstAccess(userId: number, firstAccess: boolean): Observable<any> {
     return this.http.put(`${this.apiUrl}/auth/${userId}/firstAccess`, { firstAccess });
   }
-
-  updateFirstAccess2(userId: number, firstAccess2: boolean): Observable<any> {
-    return this.http.put(`${this.apiUrl}/auth/user/${userId}/firstAccess2`, { firstAccess2 });
-  }
-  
 }

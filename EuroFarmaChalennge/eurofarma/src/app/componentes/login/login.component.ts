@@ -61,6 +61,7 @@ export class LoginComponent {
           const userName = response.name;
           const userId = response.id;
           const firstAccess = response.firstAccess !== undefined ? response.firstAccess : false;
+          const firstAccess2 = response.firstAccess2 !== undefined ? response.firstAccess2 : false;
   
           // Atualiza o localStorage com os dados do usuário
           localStorage.setItem('userName', userName);
@@ -68,6 +69,7 @@ export class LoginComponent {
           localStorage.setItem('token', response.token);
           localStorage.setItem('userId', userId);
           localStorage.setItem('firstAccess', firstAccess.toString());
+          localStorage.setItem('firstAccess2', firstAccess2.toString());
           console.log('firstAccess:', firstAccess);
   
           // Se o firstAccess é true, redirecione para /tour, caso contrário, para /dashboard

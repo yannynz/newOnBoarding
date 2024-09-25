@@ -62,7 +62,8 @@ public class AuthController {
                     "name", loggedInUser.getName(),
                     "role", loggedInUser.getRole(),
                     "token", "some-generated-token",
-                    "firstAccess", loggedInUser.isFirstAccess() // Adicione isso
+                    "firstAccess", loggedInUser.isFirstAccess(),// Adicione isso
+                    "firstAccess2", loggedInUser.isFirstAccess2() // Adicione esta linha
             ));
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");

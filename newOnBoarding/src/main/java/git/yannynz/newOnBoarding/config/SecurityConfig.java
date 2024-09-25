@@ -17,6 +17,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/api/reminders/**").permitAll() // Permite acesso aos endpoints de reminder
                         .requestMatchers("/auth/**").permitAll() // Permite acesso aos endpoints de autenticação
+                        .requestMatchers("/users/**").permitAll() // Adiciona permissão para /users/**
+                        .requestMatchers("/api/feedbacks/**").permitAll() // Permite acesso aos endpoints de feedback
                         .anyRequest().authenticated() // Requer autenticação para qualquer outra solicitação
                 )
                 .logout(logout -> logout

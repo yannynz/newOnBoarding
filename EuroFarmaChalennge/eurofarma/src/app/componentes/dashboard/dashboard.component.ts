@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
+import { Feedback } from 'src/app/models/feedback.model';
+import { FeedbackService } from 'src/app/services/feedback.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,6 +14,11 @@ export class DashboardComponent implements OnInit {
   saudacao: string = '';
   modalAberto: boolean = false;
   cardAtual: any = {};
+  showFeedbackPopup: boolean = false;
+  selectedRating: number = 0;
+  comment: string = '';
+  showThankYouPopup: boolean = false;
+  
 
   cards = [
     {
@@ -43,13 +51,100 @@ export class DashboardComponent implements OnInit {
     }
   ];
 
-  constructor() { }
+  constructor(private authService: AuthService, private feedbackService: FeedbackService) { }
 
+  
   ngOnInit(): void {
     // Recuperar o nome do usuário armazenado no localStorage
     this.usuarioNome = localStorage.getItem('userName') || 'Usuário';
     this.definirSaudacao();
+    this.checkDashboardAccess();
   }
+
+  checkDashboardAccess() {
+    const accesses = localStorage.getItem('dashboardAccesses');
+    let accessCount = accesses ? parseInt(accesses, 10) : 0;
+
+    accessCount += 1;
+    localStorage.setItem('dashboardAccesses', accessCount.toString());
+
+    console.log(`Acessos do dashboard: ${accessCount}`); // Log para verificar a contagem
+
+    // Verifica se o número de acessos é maior ou igual a 3
+    if (accessCount >= 3) {
+      console.log('Acessos do dashboard atingiram 3. Chamando checkFirstAccess2...');
+      this.checkFirstAccess2();
+    }
+  }
+
+  checkFirstAccess2() {
+    console.log('Entrou Checkfirstaccess');
+    const userIdStr = localStorage.getItem('userId');
+
+    if (userIdStr) {
+        const userId = +userIdStr; // Converte para número
+        console.log('Entrou If');
+
+        // Aqui você chama o método do serviço para verificar firstAccess2
+        const firstAccess2 = this.feedbackService.getUserFirstAccess2(userId);
+        
+        console.log('Valor de firstAccess2:', firstAccess2);
+
+        // Se for true, mostra o pop-up
+        if (firstAccess2) {
+            this.showFeedbackPopup = true;
+            console.log('Feedback Pop Up True');
+        } else {
+            console.log('firstAccess2 é false');
+        }
+    } else {
+        console.error('User ID is not available in localStorage.');
+    }
+}
+
+
+submitFeedback(rating: number, comment: string) {
+    const userIdString = localStorage.getItem('userId');
+    if (rating === 0) {
+      alert("Por favor, selecione uma avaliação de estrelas."); // Validação de estrelas
+      return;
+    }
+    
+    if (userIdString !== null) {
+        const userId = +userIdString; // Converte a string para número
+        const feedback: Feedback = { userId, rating, comment }; // Cria o objeto de feedback
+        
+        this.feedbackService.createFeedback(feedback).subscribe(() => {
+            // Atualiza firstAccess2 no localStorage para false após o feedback
+            localStorage.setItem('firstAccess2', 'false');
+            this.showFeedbackPopup = false;
+            localStorage.removeItem('dashboardAccesses');
+        });
+
+        // Exibe o pop-up de agradecimento
+        this.showThankYouPopup = true;
+        
+        // Esconde o pop-up após 3 segundos
+        setTimeout(() => {
+          this.showThankYouPopup = false;
+        }, 3000);
+
+
+    } else {
+        console.error('User ID is not available in localStorage.');
+    }
+}
+
+declineFeedback() {
+  // Atualiza firstAccess2 no localStorage para false
+  localStorage.setItem('firstAccess2', 'false');
+  this.showFeedbackPopup = false; // Fecha o popup
+}
+
+setRating(star: number): void {
+  this.selectedRating = star; // Define a estrela selecionada
+}
+
 
   definirSaudacao(): void {
     const horaAtual = new Date().getHours();
@@ -70,5 +165,4 @@ export class DashboardComponent implements OnInit {
   fecharModal(event?: MouseEvent): void {
     this.modalAberto = false;
   }
-
 }

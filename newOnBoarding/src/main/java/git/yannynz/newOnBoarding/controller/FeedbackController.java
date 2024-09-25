@@ -12,6 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import git.yannynz.newOnBoarding.model.Feedback;
 
+
+
 @RestController
 @RequestMapping("/api/feedbacks")
 public class FeedbackController {
@@ -23,7 +25,7 @@ public class FeedbackController {
     private UserService userService;
 
     // Método para atualizar o campo firstAccess2
-    @PutMapping("/user/{id}/firstAccess2")
+    @PutMapping("/users/{id}/firstAccess2")
     public ResponseEntity<String> updateFirstAccess2(@PathVariable Long id, @RequestBody Map<String, Boolean> body) {
         Optional<User> userOpt = userService.findById(id);
         System.out.println("Update method for firstAccess2 called");
@@ -43,12 +45,12 @@ public class FeedbackController {
         }
     }
 
-    @GetMapping("/user/{userId}")
+    @GetMapping("/users/{userId}")
     public List<Feedback> getFeedbacksByUser(@PathVariable Long userId) {
         return feedbackService.getFeedbacksByUser(userId);
     }
 
-    @PostMapping("/user/{userId}")
+    @PostMapping("/users/{userId}")
     public ResponseEntity<Feedback> createFeedback(@PathVariable Long userId, @RequestBody Feedback feedback) {
         User user = userService.findById(userId).orElseThrow(() -> new IllegalArgumentException("User not found"));
         feedback.setUser(user);

@@ -30,4 +30,27 @@
   </div>
 </div>
 
+<div class="overlay" *ngIf="showFeedbackPopup"></div>
+<div *ngIf="showFeedbackPopup" class="feedback-popup">
+  <h2>Avalie sua experiência</h2>
+  <label>Quantas estrelas você nos dá? </label>
+  <div class="stars">
+    <span *ngFor="let star of [1,2,3,4,5]" 
+          (click)="setRating(star)" 
+          [ngClass]="{'selected': star <= selectedRating}">
+      ★
+    </span>
+  </div>
+    <textarea [(ngModel)]="comment" placeholder="Deixe seu comentário" required></textarea>
+    <div class="button-container">
+      <button id="btn-nao" (click)="declineFeedback()">Não, obrigado</button>
+      <button type="submit" (click)="submitFeedback(selectedRating, comment)">Enviar Avaliação</button>
+    </div>
+</div>
+
+<!-- Popup de Agradecimento -->
+<div class="thank-you-popup" *ngIf="showThankYouPopup">
+  <span class="alert-icon">✅</span>
+    <span class="text-dark">  Obrigado por avaliar!</span>
+</div>
 
