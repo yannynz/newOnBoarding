@@ -18,4 +18,36 @@
             </div>
         </div>
     </div>
+
+    <!-- Inputs de Pesquisa e Tabela de Usuários -->
+    <div class="search-container container">
+        <input type="text" placeholder="Pesquisar por Nome" class="search-input" />
+        <select class="search-select">
+            <option value="">Selecionar Role</option>
+            <option value="admin">Admin</option>
+            <option value="ti">Ti</option>
+            <option value="financeiro">Financeiro</option>
+            <option value="gerente">Gerente</option>
+        </select>
+        <input type="email" placeholder="Pesquisar por E-mail" class="search-input" />
+        <input type="number" placeholder="Pesquisar por ID" class="search-input" />
+        <button class="search-button">Pesquisar</button>
+    </div>
+
+    <!-- Tabela de Usuários -->
+    <div class="user-table-container container">
+        <table class="user-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>E-mail</th>
+                    <th>Role</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Linhas da tabela serão preenchidas aqui -->
+            </tbody>
+        </table>
+    </div>
 </div>
