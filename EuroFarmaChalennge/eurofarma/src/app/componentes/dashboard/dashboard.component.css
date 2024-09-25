@@ -73,6 +73,58 @@ span {
   margin: 0; /* Remove margens padrão */
 }
 
+/* Modal Overlay */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Modal Content */
+.modal-content {
+  background: linear-gradient(180deg, #00488e 0%, #006bbd 100%);
+  padding: 80px;
+  display: flex; /* Flexbox para alinhar lado a lado */
+  flex-direction: row; /* Garante que os itens sejam alinhados na horizontal */
+  align-items: center; /* Alinha verticalmente os itens no centro */
+  justify-content: space-between; /* Espaço entre os itens */
+  width: 80%;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Ajuste o espaço para o texto e imagem */
+.modal-text {
+  flex: 1; /* Permite que o texto ocupe o espaço disponível */
+  margin-right: 70px; /* Adiciona um espaço à direita do texto */
+}
+
+.modal-text h2 {
+  color: #fff;
+  font-size: 28px;
+}
+
+.modal-text p {
+  font-size: 18px;
+  color: #fff;
+}
+
+.modal-image {
+  flex: 1; /* Permite que a imagem ocupe o espaço disponível */
+}
+
+.modal-image img {
+  width: 100%; /* A imagem ocupará todo o espaço da div */
+  border-radius: 10px;
+}
+
 
 .card h2 {
   font-size: 20px;
