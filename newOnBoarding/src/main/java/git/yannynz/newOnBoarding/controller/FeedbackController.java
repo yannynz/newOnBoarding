@@ -56,5 +56,12 @@ public class FeedbackController {
         feedback.setUser(user);
         return ResponseEntity.ok(feedbackService.createFeedback(feedback));
     }
+
+    // Novo método para obter a contagem de feedbacks por estrelas
+    @GetMapping("/count-by-stars")
+    public ResponseEntity<Map<Integer, Integer>> getFeedbackCountByStars() {
+        Map<Integer, Integer> starCount = feedbackService.getFeedbackCountByStars();
+        return ResponseEntity.ok(starCount);
+    }
 }
 

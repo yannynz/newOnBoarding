@@ -24,6 +24,10 @@ export class FeedbackService {
     const firstAccess2 = localStorage.getItem('firstAccess2');
     return firstAccess2 === 'true'; // Retorna true ou false com base no valor armazenado
   }
+
+  getFeedbackCountByStars(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/count-by-stars`);
+  }
 }
 
 
