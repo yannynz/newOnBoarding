@@ -11,7 +11,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonManagedReference; // Adicionar import
+import com.fasterxml.jackson.annotation.JsonManagedReference; 
 
 @Entity
 @Table(name = "users")
@@ -34,15 +34,16 @@ public class User {
     private String role;
 
     @Column(name = "first_access")
-    private boolean firstAccess = true; // Adicionado o campo FirstAccess
+    private boolean firstAccess = true;
 
+    @Column(name = "first_access2")
+    private boolean firstAccess2 = true;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference // Evita recursão infinita
     private List<Reminder> reminders = new ArrayList<>();
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference // Evita recursão infinita
- 
     private List<Feedback> feedbacks = new ArrayList<>();
 
     // Construtor padrão vazio
@@ -65,6 +66,14 @@ public class User {
     // Getters e Setters
     public boolean isFirstAccess() {
         return firstAccess;
+    }
+    
+    public boolean isFirstAccess2() {
+        return firstAccess2;
+    }
+
+    public void setFirstAccess2(boolean firstAccess2) {
+        this.firstAccess2 = firstAccess2;
     }
 
     public void setFirstAccess(boolean firstAccess) {
