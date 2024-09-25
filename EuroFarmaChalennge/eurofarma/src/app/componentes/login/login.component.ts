@@ -76,7 +76,11 @@ export class LoginComponent {
           if (firstAccess) {
             this.router.navigate(['/tour']);
           } else {
-            this.router.navigate(['/dashboard']);
+            if(userRole === 'gerente'){
+              this.router.navigate(['/gerente']);
+            } else {
+              this.router.navigate(['/dashboard']);
+            }
           }
         },
         error: (error) => {

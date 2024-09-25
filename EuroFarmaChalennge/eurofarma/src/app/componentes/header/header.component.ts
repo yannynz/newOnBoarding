@@ -11,26 +11,13 @@ export class HeaderComponent implements OnInit {
   videosLink: string | undefined;
   pdfLink: string | undefined;
   showLogoutPopup: boolean = false; // Controle para exibir o pop-up de logout
+  userRole: string | null = '';
 
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    const userRole = localStorage.getItem('userRole');
-
-    // Definindo as rotas com base no role do usuário
-    if (userRole === 'admin') {
-      this.lembretesLink = '/admin-lembretes';
-      this.videosLink = '/admin-videos';
-      this.pdfLink = '/admin-pdfs';
-    } else if (userRole === 'ti') {
-      this.lembretesLink = '/ti-lembretes';
-      this.videosLink = '/ti-videos';
-      this.pdfLink = '/ti-pdfs';
-    } else if (userRole === 'financeiro') {
-      this.lembretesLink = '/financeiro-lembretes';
-      this.videosLink = '/financeiro-videos';
-      this.pdfLink = '/financeiro-pdfs';
-    }
+    // Atribuir o valor obtido do localStorage à propriedade userRole
+    this.userRole = localStorage.getItem('userRole');
   }
 
   toggleLogoutPopup(): void {

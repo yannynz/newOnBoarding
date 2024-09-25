@@ -8,6 +8,7 @@ import { VideosComponent } from './componentes/videos/videos.component';
 import { DashboardComponent } from './componentes/dashboard/dashboard.component';
 import { LembretesComponent } from './componentes/lembretes/lembretes.component';
 import { TourComponent } from './componentes/tour/tour.component';
+import { GerenteComponent } from './componentes/gerente/gerente.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -20,6 +21,13 @@ const routes: Routes = [
   // Rotas para PDFs e Vídeos, filtrando com base na role
   { path: 'pdfs', component: PdfsComponent, canActivate: [AuthGuard] },
   { path: 'videos', component: VideosComponent, canActivate: [AuthGuard] },
+
+  { 
+    path: 'gerente', 
+    component: GerenteComponent, 
+    canActivate: [AuthGuard, RoleGuard], 
+    data: { role: 'gerente' } // Passando o papel (role) exigido para a rota
+  },
 
   // Rota raiz com lógica de redirecionamento
   {

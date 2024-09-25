@@ -4,14 +4,15 @@
   </a>
   <nav class="header-menu">
     <ul class="ul-pc">
-      <li class="li-pc"><a class="a-pc-header a-header" [routerLink]="['/dashboard']">Geral</a></li>
-      <li class="li-pc"><a class="a-pc-header a-header" [routerLink]="['/lembretes']">Lembretes</a></li>
-      <li class="li-pc"><a class="a-pc-header a-header" [routerLink]="['/videos']">Vídeos</a></li>
-      <li class="li-pc"><a class="a-pc-header a-header" [routerLink]="['/pdfs']">Pdf</a></li>
+      <!-- Exibir os links apenas se o usuário não for gerente -->
+      <li *ngIf="userRole !== 'gerente'" class="li-pc"><a class="a-pc-header a-header" [routerLink]="['/dashboard']">Geral</a></li>
+      <li *ngIf="userRole !== 'gerente'" class="li-pc"><a class="a-pc-header a-header" [routerLink]="['/lembretes']">Lembretes</a></li>
+      <li *ngIf="userRole !== 'gerente'" class="li-pc"><a class="a-pc-header a-header" [routerLink]="['/videos']">Vídeos</a></li>
+      <li *ngIf="userRole !== 'gerente'" class="li-pc"><a class="a-pc-header a-header" [routerLink]="['/pdfs']">Pdf</a></li>
+      
+      <!-- Sempre mostrar o ícone de usuário e logout -->
       <li class="li-pc">
         <a class="a-pc-header a-header" (click)="toggleLogoutPopup()"><i class="fa-regular fa-user"></i></a>
-
-        <!-- Pop-up de logout -->
         <div *ngIf="showLogoutPopup" class="logout-popup">
           <button (click)="logout()">Sair</button>
         </div>
@@ -34,14 +35,15 @@
     </label>
 
     <ul class="celular-botoes">
-      <li class="li2 border-bottom"><a class='elemento-header' [routerLink]="['/dashboard']">Geral</a></li>
-      <li class="li2 border-bottom"><a class='elemento-header' [routerLink]="['/lembretes']">Lembretes</a></li>
-      <li class="li2 border-bottom"><a class='elemento-header' [routerLink]="['/videos']">Vídeos</a></li>
-      <li class="li2 border-bottom"><a class='elemento-header' [routerLink]="['/pdfs']">Pdf</a></li>
+      <!-- Exibir os links apenas se o usuário não for gerente -->
+      <li *ngIf="userRole !== 'gerente'" class="li2 border-bottom"><a class='elemento-header' [routerLink]="['/dashboard']">Geral</a></li>
+      <li *ngIf="userRole !== 'gerente'" class="li2 border-bottom"><a class='elemento-header' [routerLink]="['/lembretes']">Lembretes</a></li>
+      <li *ngIf="userRole !== 'gerente'" class="li2 border-bottom"><a class='elemento-header' [routerLink]="['/videos']">Vídeos</a></li>
+      <li *ngIf="userRole !== 'gerente'" class="li2 border-bottom"><a class='elemento-header' [routerLink]="['/pdfs']">Pdf</a></li>
+      
+      <!-- Sempre mostrar o ícone de usuário e logout -->
       <li class="li2 border-bottom">
         <a class="elemento-header" (click)="toggleLogoutPopup()"><i class="fa-regular fa-user"></i></a>
-
-        <!-- Pop-up de logout -->
         <div *ngIf="showLogoutPopup" class="logout-popup">
           <button (click)="logout()">Sair</button>
         </div>

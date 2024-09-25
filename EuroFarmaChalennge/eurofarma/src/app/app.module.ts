@@ -18,6 +18,7 @@ import { SafeUrlPipe } from './safe-url.pipe';
 import { VideosComponent } from './componentes/videos/videos.component';
 import { PdfsComponent } from './componentes/pdfs/pdfs.component';
 import { TourComponent } from './componentes/tour/tour.component';
+import { GerenteComponent } from './componentes/gerente/gerente.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { TourComponent } from './componentes/tour/tour.component';
     SafeUrlPipe,
     VideosComponent,
     PdfsComponent,
-    TourComponent
+    TourComponent,
+    GerenteComponent
   ],
   imports: [
     BrowserModule,
