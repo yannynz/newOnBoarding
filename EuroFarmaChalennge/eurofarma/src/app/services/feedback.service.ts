@@ -32,6 +32,18 @@ export class FeedbackService {
   getUserCountByRoles(): Observable<any> {
     return this.http.get(`${this.apiUrl}/count-by-roles`);
 }
+
+searchUsers(name?: string, role?: string, email?: string, id?: number): Observable<any[]> {
+  // Cria um objeto com os parâmetros de pesquisa
+  const params: any = {};
+  if (name) params.name = name;
+  if (role) params.role = role;
+  if (email) params.email = email;
+  if (id) params.id = id;
+
+  // Faz a requisição GET para o backend
+  return this.http.get<any[]>(`${this.apiUrl}/search`, { params });
+}
 }
 
 

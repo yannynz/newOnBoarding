@@ -7,10 +7,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class UserService {
@@ -59,5 +56,39 @@ public class UserService {
 
         return roleCount;
     }
+
+    public List<User> searchUsers(String name, String email, Long id, String role) {
+        // Cria uma lista vazia para armazenar os resultados filtrados
+        List<User> filteredUsers = new ArrayList<>();
+
+        // Obtém todos os usuários
+        List<User> allUsers = userRepository.findAll();
+
+        // Filtra os usuários com base nos parâmetros fornecidos
+        for (User user : allUsers) {
+            boolean matches = true; // Variável que indica se o usuário corresponde aos critérios
+
+            if (name != null && !name.isEmpty() && !user.getName().toLowerCase().contains(name.toLowerCase())) {
+                matches = false; // Não corresponde ao nome
+            }
+            if (email != null && !email.isEmpty() && !user.getEmail().toLowerCase().contains(email.toLowerCase())) {
+                matches = false; // Não corresponde ao e-mail
+            }
+            if (id != null && !user.getId().equals(id)) {
+                matches = false; // Não corresponde ao ID
+            }
+            if (role != null && !role.isEmpty() && !user.getRole().equalsIgnoreCase(role)) {
+                matches = false; // Não corresponde à role
+            }
+
+            // Se o usuário corresponder a todos os critérios, adiciona à lista de resultados
+            if (matches) {
+                filteredUsers.add(user);
+            }
+        }
+
+        return filteredUsers; // Retorna a lista de usuários filtrados
+    }
+
 }
 

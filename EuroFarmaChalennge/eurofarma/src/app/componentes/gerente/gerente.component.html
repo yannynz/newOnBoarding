@@ -22,34 +22,40 @@
     </div>
 
     <!-- Inputs de Pesquisa e Tabela de Usuários -->
-    <div class="search-container container">
-        <input type="text" placeholder="Nome" class="search-input" />
-        <select class="search-select">
-            <option value="">Selecionar Role</option>
-            <option value="admin">Admin</option>
-            <option value="ti">Ti</option>
-            <option value="financeiro">Financeiro</option>
-            <option value="gerente">Gerente</option>
-        </select>
-        <input type="email" placeholder="E-mail" class="search-input" />
-        <input type="number" placeholder="ID" class="search-input" />
-        <button class="search-button">Pesquisar</button>
-    </div>
+<div class="search-container container">
+  <input type="text" placeholder="Nome" class="search-input" [(ngModel)]="searchName" />
+  <select class="search-select" [(ngModel)]="searchRole">
+      <option value="">Selecionar Role</option>
+      <option value="admin">Admin</option>
+      <option value="ti">Ti</option>
+      <option value="financeiro">Financeiro</option>
+      <option value="gerente">Gerente</option>
+  </select>
+  <input type="email" placeholder="E-mail" class="search-input" [(ngModel)]="searchEmail" />
+  <input type="number" placeholder="ID" class="search-input" [(ngModel)]="searchId" />
+  <button class="search-button" (click)="searchUsers()">Pesquisar</button>
+</div>
 
-    <!-- Tabela de Usuários -->
-    <div class="user-table-container container">
-        <table class="user-table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nome</th>
-                    <th>E-mail</th>
-                    <th>Role</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Linhas da tabela serão preenchidas aqui -->
-            </tbody>
-        </table>
-    </div>
+<!-- Tabela de Usuários -->
+<div class="user-table-container container">
+  <table class="user-table">
+      <thead>
+          <tr>
+              <th>ID</th>
+              <th>Nome</th>
+              <th>E-mail</th>
+              <th>Role</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let user of users">
+              <td>{{ user.id }}</td>
+              <td>{{ user.name }}</td>
+              <td>{{ user.email }}</td>
+              <td>{{ user.role }}</td>
+          </tr>
+      </tbody>
+  </table>
+</div>
+
 </div>

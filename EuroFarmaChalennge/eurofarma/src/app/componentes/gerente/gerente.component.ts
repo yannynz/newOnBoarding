@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
 import { FeedbackService } from 'src/app/services/feedback.service';
 import { AuthService } from 'src/app/services/auth.service'; // Importe o AuthService
+import { User } from 'src/app/models/user.model';
 
 Chart.register(...registerables);
 
@@ -21,6 +22,15 @@ export class GerenteComponent implements OnInit {
   private ratingsChart: Chart | undefined;
   private rolesChart: Chart | undefined;
 
+  users: User[] = []; // Inicializa a lista de usuários
+
+  // Adicione as propriedades de pesquisa
+  searchName: string = '';
+  searchRole: string = '';
+  searchEmail: string = '';
+  searchId: number | undefined; // Supondo que isso pode ser nulo, ou você pode definir um valor padrão
+
+
   constructor(private feedbackService: FeedbackService, private authService: AuthService) {} // Injete o AuthService
 
   ngOnInit(): void {
@@ -28,6 +38,7 @@ export class GerenteComponent implements OnInit {
     this.definirSaudacao();
     this.getFeedbackCountByStars(); // Obtém as contagens de feedbacks
     this.getUserCountByRoles(); // Obtém a contagem de usuários por roles
+    this.searchUsers();
   }
 
   getFeedbackCountByStars(): void {
@@ -64,55 +75,53 @@ export class GerenteComponent implements OnInit {
       this.ratingsChart.destroy();
     }
 
-  // Cria o gráfico de Avaliações
-const ratingsCtx = document.getElementById('ratingsChart') as HTMLCanvasElement;
+    // Cria o gráfico de Avaliações
+    const ratingsCtx = document.getElementById('ratingsChart') as HTMLCanvasElement;
 
- // Ignorando o erro pois o código funciona mesmo assim
+    // Ignorando o erro pois o código funciona mesmo assim
     // @ts-ignore
-this.ratingsChart = new Chart(ratingsCtx, {
-  type: 'doughnut', // Muda o tipo para doughnut
-  data: {
-    labels: ['1 Estrela', '2 Estrelas', '3 Estrelas', '4 Estrelas', '5 Estrelas'],
-    datasets: [{
-      label: 'Avaliações',
-      data: this.ratings,
-      backgroundColor: [
-        'rgba(241, 220, 22, 0.6)', // 1 Estrela
-        'rgba(50, 168, 82, 0.6)',   // 2 Estrelas
-        'rgba(22, 50, 241, 0.6)',   // 3 Estrelas
-        'rgba(241, 22, 22, 0.6)',    // 4 Estrelas
-        'rgba(22, 241, 196, 0.6)',   // 5 Estrelas
-      ],
-    }]
-  },
-  options: {
-    responsive: true, // Habilita a responsividade do gráfico
-    plugins: {
-      legend: {
-        display: false, // Remove a legenda
+    this.ratingsChart = new Chart(ratingsCtx, {
+      type: 'doughnut', // Muda o tipo para doughnut
+      data: {
+        labels: ['1 Estrela', '2 Estrelas', '3 Estrelas', '4 Estrelas', '5 Estrelas'],
+        datasets: [{
+          label: 'Avaliações',
+          data: this.ratings,
+          backgroundColor: [
+            'rgba(241, 220, 22, 0.6)', // 1 Estrela
+            'rgba(50, 168, 82, 0.6)',   // 2 Estrelas
+            'rgba(22, 50, 241, 0.6)',   // 3 Estrelas
+            'rgba(241, 22, 22, 0.6)',    // 4 Estrelas
+            'rgba(22, 241, 196, 0.6)',   // 5 Estrelas
+          ],
+        }]
       },
-      tooltip: {
-        enabled: true, // Habilita os tooltips
-        callbacks: {
-          label: function(tooltipItem) {
-            return `${tooltipItem.label}: ${tooltipItem.raw}`; // Exibe o valor ao passar o mouse
+      options: {
+        responsive: true, // Habilita a responsividade do gráfico
+        plugins: {
+          legend: {
+            display: false, // Remove a legenda
+          },
+          tooltip: {
+            enabled: true, // Habilita os tooltips
+            callbacks: {
+              label: function(tooltipItem) {
+                return `${tooltipItem.label}: ${tooltipItem.raw}`; // Exibe o valor ao passar o mouse
+              }
+            }
+          }
+        },
+        // Remove as linhas de grade, que não são relevantes para o gráfico de donut
+        scales: {
+          x: {
+            display: false, // Não é necessário para gráfico de donut
+          },
+          y: {
+            display: false, // Não é necessário para gráfico de donut
           }
         }
       }
-    },
-    // Remove as linhas de grade, que não são relevantes para o gráfico de donut
-    scales: {
-      x: {
-        display: false, // Não é necessário para gráfico de donut
-      },
-      y: {
-        display: false, // Não é necessário para gráfico de donut
-      }
-    }
-  }
-});
-
-
+    });
 
     if (this.rolesChart) {
       this.rolesChart.destroy();
@@ -161,10 +170,7 @@ this.ratingsChart = new Chart(ratingsCtx, {
         }
       }
     });
-
-
   }
-
 
   definirSaudacao(): void {
     const horaAtual = new Date().getHours();
@@ -175,5 +181,17 @@ this.ratingsChart = new Chart(ratingsCtx, {
     } else {
       this.saudacao = 'Boa noite';
     }
+  }
+
+  searchUsers() {
+    this.users = []; // Limpa a lista de usuários antes de buscar
+    this.feedbackService.searchUsers(this.searchName, this.searchRole, this.searchEmail, this.searchId).subscribe(
+      (data) => {
+        this.users = data; // Preenche a lista com os dados retornados
+      },
+      (error) => {
+        console.error('Erro ao buscar usuários:', error);
+      }
+    );
   }
 }

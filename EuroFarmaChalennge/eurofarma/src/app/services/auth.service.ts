@@ -26,9 +26,9 @@ export class AuthService {
 
   // Armazenar dados do usuário no localStorage após o login
   saveUserData(user: any): void {
-    localStorage.setItem('userId', user.id); 
-    localStorage.setItem('token', user.token); 
-    localStorage.setItem('firstAccess', user.firstAccess.toString()); 
+    localStorage.setItem('userId', user.id);
+    localStorage.setItem('token', user.token);
+    localStorage.setItem('firstAccess', user.firstAccess.toString());
     localStorage.setItem('firstAccess2', user.firstAccess2.toString()); // Adicionando firstAccess2
     console.log('User data saved:', {
       userId: user.id,
@@ -37,7 +37,7 @@ export class AuthService {
       firstAcces2: user.firstAccess2
     });
   }
-  
+
 
   // Recuperar o userId do localStorage
   getUserId(): number | null {

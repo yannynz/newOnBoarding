@@ -71,5 +71,16 @@ public class FeedbackController {
         System.out.println("Role count retrieved: " + roleCount); // Verificando a contagem de roles
         return ResponseEntity.ok(roleCount);
     }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<User>> searchUsers(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String email,
+            @RequestParam(required = false) Long id,
+            @RequestParam(required = false) String role) {
+        List<User> users = userService.searchUsers(name, email, id, role);
+        return ResponseEntity.ok(users);
+    }
+
 }
 
