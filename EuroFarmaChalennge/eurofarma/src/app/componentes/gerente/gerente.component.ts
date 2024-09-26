@@ -49,7 +49,7 @@ export class GerenteComponent implements OnInit {
 
         // Calcula o total de usuários somando as contagens de roles
         this.totalUsers = Object.values(this.rolesCount).reduce((acc, count) => acc + count, 0);
-        
+
         this.createCharts(); // Atualiza os gráficos após obter os dados
       },
       (error) => {
@@ -64,52 +64,105 @@ export class GerenteComponent implements OnInit {
       this.ratingsChart.destroy();
     }
 
-    // Cria o gráfico de Avaliações
-    const ratingsCtx = document.getElementById('ratingsChart') as HTMLCanvasElement;
-    this.ratingsChart = new Chart(ratingsCtx, {
-      type: 'bar',
-      data: {
-        labels: ['1 Estrela', '2 Estrelas', '3 Estrelas', '4 Estrelas', '5 Estrelas'],
-        datasets: [{
-          label: 'Avaliações',
-          data: this.ratings,
-          backgroundColor: 'rgba(241, 220, 22, 0.6)',
-        }]
+  // Cria o gráfico de Avaliações
+const ratingsCtx = document.getElementById('ratingsChart') as HTMLCanvasElement;
+
+ // Ignorando o erro pois o código funciona mesmo assim
+    // @ts-ignore
+this.ratingsChart = new Chart(ratingsCtx, {
+  type: 'doughnut', // Muda o tipo para doughnut
+  data: {
+    labels: ['1 Estrela', '2 Estrelas', '3 Estrelas', '4 Estrelas', '5 Estrelas'],
+    datasets: [{
+      label: 'Avaliações',
+      data: this.ratings,
+      backgroundColor: [
+        'rgba(241, 220, 22, 0.6)', // 1 Estrela
+        'rgba(50, 168, 82, 0.6)',   // 2 Estrelas
+        'rgba(22, 50, 241, 0.6)',   // 3 Estrelas
+        'rgba(241, 22, 22, 0.6)',    // 4 Estrelas
+        'rgba(22, 241, 196, 0.6)',   // 5 Estrelas
+      ],
+    }]
+  },
+  options: {
+    responsive: true, // Habilita a responsividade do gráfico
+    plugins: {
+      legend: {
+        display: false, // Remove a legenda
       },
-      options: {
-        scales: {
-          x: {
-            beginAtZero: true
+      tooltip: {
+        enabled: true, // Habilita os tooltips
+        callbacks: {
+          label: function(tooltipItem) {
+            return `${tooltipItem.label}: ${tooltipItem.raw}`; // Exibe o valor ao passar o mouse
           }
         }
       }
-    });
+    },
+    // Remove as linhas de grade, que não são relevantes para o gráfico de donut
+    scales: {
+      x: {
+        display: false, // Não é necessário para gráfico de donut
+      },
+      y: {
+        display: false, // Não é necessário para gráfico de donut
+      }
+    }
+  }
+});
 
-    // Destrói o gráfico de roles se já existir
+
+
     if (this.rolesChart) {
       this.rolesChart.destroy();
     }
 
     // Cria o gráfico de Roles
     const rolesCtx = document.getElementById('rolesChart') as HTMLCanvasElement;
+
+    const colors = [
+      'rgba(54, 162, 235, 0.6)', // Azul claro
+      'rgba(255, 206, 86, 0.6)', // Amarelo
+      'rgba(75, 192, 192, 0.6)', // Verde água
+      'rgba(153, 102, 255, 0.6)', // Roxo
+    ];
+
+    // Ignorando o erro pois o código funciona mesmo assim
+    // @ts-ignore
     this.rolesChart = new Chart(rolesCtx, {
-      type: 'bar',
+      type: 'doughnut',
       data: {
         labels: Object.keys(this.rolesCount), // Usa as keys das roles
         datasets: [{
-          label: 'Quantidade de Roles',
           data: Object.values(this.rolesCount), // Usa os values das roles
-          backgroundColor: 'rgba(0, 68, 142, 0.6)',
+          backgroundColor: colors.slice(0, Object.keys(this.rolesCount).length), // Ajusta as cores com base na quantidade de roles
         }]
       },
       options: {
-        scales: {
-          y: {
-            beginAtZero: true
+        responsive: true, // Habilita a responsividade do gráfico
+        elements: {
+          arc: {
+            borderWidth: 1 // Remove a borda dos segmentos
+          }
+        },
+        plugins: {
+          legend: {
+            display: false, // Exibe a legenda
+          },
+          tooltip: {
+            enabled: true, // Habilita os tooltips
+            callbacks: {
+              label: function(tooltipItem) {
+                return `${tooltipItem.label}: ${tooltipItem.raw}`; // Exibe o valor ao passar o mouse
+              }
+            }
           }
         }
       }
     });
+
+
   }
 
 

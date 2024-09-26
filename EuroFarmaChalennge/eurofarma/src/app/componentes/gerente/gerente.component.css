@@ -3,6 +3,11 @@
     text-align: center;
 }
 
+canvas{
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .textos-chamada h1 {
     font-size: 60px;
     color: #00488e;
@@ -36,7 +41,7 @@ span {
 }
 
 .chart-container {
-    width: 30%; /* Ajuste conforme necessário */
+    width: 100%; /* Ajuste conforme necessário */
     height: 200px; /* Defina uma altura para o gráfico */
     margin: 10px; /* Margem entre os gráficos */
 }
@@ -59,28 +64,29 @@ span {
 
 /* Container para inputs e botão de pesquisa */
 .search-container {
-    display: flex; /* Alinha os itens na mesma linha */
-    margin-top: 80px; /* Espaçamento acima do container de busca */
+  display: flex; /* Alinha os itens na mesma linha */
+  flex-wrap: nowrap;
+  margin-top: 80px; /* Espaçamento acima do container de busca */
 }
 
 .search-input,
 .search-select {
-    padding: 10px;
-    margin: 5px; /* Espaçamento lateral */
-    width: calc(25% - 20px); /* Define uma largura fixa para os inputs */
-    border-radius: 10px;
-    border: 1px solid #cfcbcb;
+  padding: 10px;
+  margin: 5px; /* Espaçamento lateral */
+  width: calc(25% - 20px); /* Define uma largura fixa para os inputs */
+  border-radius: 10px;
+  border: 1px solid #cfcbcb;
 }
 
 .search-button {
-    background-color: #00488e; /* Cor azul */
-    color: white; /* Cor do texto do botão */
-    border: none; /* Remove borda padrão */
-    padding: 10px 15px; /* Espaçamento interno */
-    border-radius: 10px; /* Bordas arredondadas */
-    cursor: pointer; /* Muda o cursor ao passar o mouse */
-    height: 47px;
-    margin-top: 3px;
+  background-color: #00488e; /* Cor azul */
+  color: white; /* Cor do texto do botão */
+  border: none; /* Remove borda padrão */
+  padding: 10px 15px; /* Espaçamento interno */
+  border-radius: 10px; /* Bordas arredondadas */
+  cursor: pointer; /* Muda o cursor ao passar o mouse */
+  height: 47px;
+  margin-top: 3px;
 }
 
 /* Restante do seu CSS... */
@@ -132,7 +138,7 @@ span {
     .total-users {
         width: 100%; /* Faz com que a total-users ocupe 100% da largura */
         margin-bottom: 60px;
-        margin-top: 60px;
+        margin-top: 90px !important;
         margin-left: 0;
     }
 
@@ -149,6 +155,25 @@ span {
     .textos-chamada h2 {
         font-size: 20px; /* Tamanho reduzido para mobile */
     }
+
+    .dashboard h2{
+      font-size: 23px;
+    }
+
+    .search-container {
+      flex-direction: column; /* Empilha os itens verticalmente em telas pequenas */
+      align-items: center; /* Centraliza os itens verticalmente */
+  }
+
+  .search-input,
+  .search-select {
+      width: 100%; /* Ocupa 100% da largura em mobile */
+  }
+
+  .search-button {
+      width: auto; /* Permite que o botão tenha largura dinâmica */
+      margin: 10px 0; /* Espaçamento acima e abaixo do botão */
+  }
 }
 
 /* Media Queries específicas para Tablets */
@@ -161,6 +186,15 @@ span {
     .total-users {
         width: 45%; /* Ajusta a largura para 45% em tablets */
         margin: 10px; /* Centraliza o total-users */
+    }
+
+    .search-input,
+    .search-select {
+        width: calc(25% - 20px); /* Mantém a largura original em telas maiores */
+    }
+
+    .search-button {
+        width: auto; /* Largura automática em telas grandes */
     }
 }
 
