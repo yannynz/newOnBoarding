@@ -6,6 +6,7 @@
 canvas{
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 7px;
 }
 
 .textos-chamada h1 {
@@ -112,6 +113,41 @@ span {
 .user-table th {
     background-color: #00488e; /* Fundo do cabeçalho da tabela */
     color: white; /* Cor do texto do cabeçalho */
+}
+
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px; /* Espaçamento acima dos controles */
+}
+
+.pagination-controls button {
+  margin: 0 10px;
+  padding: 10px 15px;
+  background-color: #00488e; /* Cor azul */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.pagination-controls button:disabled {
+  background-color: #ccc; /* Cor para botões desabilitados */
+  cursor: not-allowed; /* Muda o cursor para indicar que não pode ser clicado */
+}
+
+.btn-navegar{
+  margin: 0 10px 0 10px;
+  padding: 8px 16px;
+  background-color: #00488e;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-pagina{
+  margin-bottom: 50px;
 }
 
 /* Media Queries para Ajustes em Telas Menores */

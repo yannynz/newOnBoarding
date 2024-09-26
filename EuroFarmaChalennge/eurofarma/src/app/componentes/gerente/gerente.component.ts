@@ -23,6 +23,7 @@ export class GerenteComponent implements OnInit {
   private rolesChart: Chart | undefined;
 
   users: User[] = []; // Inicializa a lista de usuários
+  displayedUsers: User[] = []; // Usuários que serão exibidos na tabela
 
   // Adicione as propriedades de pesquisa
   searchName: string = '';
@@ -30,6 +31,8 @@ export class GerenteComponent implements OnInit {
   searchEmail: string = '';
   searchId: number | undefined; // Supondo que isso pode ser nulo, ou você pode definir um valor padrão
 
+  currentPage: number = 1;
+  pageSize: number = 10; // Número de usuários por página
 
   constructor(private feedbackService: FeedbackService, private authService: AuthService) {} // Injete o AuthService
 
@@ -184,14 +187,31 @@ export class GerenteComponent implements OnInit {
   }
 
   searchUsers() {
-    this.users = []; // Limpa a lista de usuários antes de buscar
     this.feedbackService.searchUsers(this.searchName, this.searchRole, this.searchEmail, this.searchId).subscribe(
       (data) => {
         this.users = data; // Preenche a lista com os dados retornados
+        this.updateDisplayedUsers(); // Atualiza a lista de usuários exibidos
       },
       (error) => {
         console.error('Erro ao buscar usuários:', error);
       }
     );
+  }
+
+  updateDisplayedUsers(): void {
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    this.displayedUsers = this.users.slice(startIndex, endIndex); // Apenas exibe usuários da página atual
+  }
+
+  // Método para mudar de página
+  changePage(page: number): void {
+    this.currentPage = page;
+    this.updateDisplayedUsers(); // Atualiza os usuários a serem exibidos
+  }
+
+  // Calcula o número total de páginas
+  get totalPages(): number {
+    return Math.ceil(this.users.length / this.pageSize);
   }
 }

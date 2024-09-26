@@ -9,6 +9,7 @@
             <div class="chart-container">
                 <h2>Avaliações</h2>
                 <canvas id="ratingsChart"></canvas>
+                <p>Ler todas</p>
             </div>
             <div class="total-users">
                 <h2>Total de Usuários</h2>
@@ -48,7 +49,7 @@
           </tr>
       </thead>
       <tbody>
-          <tr *ngFor="let user of users">
+          <tr *ngFor="let user of displayedUsers">
               <td>{{ user.id }}</td>
               <td>{{ user.name }}</td>
               <td>{{ user.email }}</td>
@@ -56,6 +57,12 @@
           </tr>
       </tbody>
   </table>
+</div>
+
+<div class="btn-pagina">
+  <button class="btn-navegar" (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">Anterior</button>
+  <span class="text-dark">Página {{ currentPage }} de {{ totalPages }}</span>
+  <button class="btn-navegar" (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">Próximo</button>
 </div>
 
 </div>
