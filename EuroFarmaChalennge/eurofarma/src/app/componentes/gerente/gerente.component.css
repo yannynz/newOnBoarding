@@ -30,6 +30,7 @@ span {
     align-items: flex-start; /* Alinha os itens no topo */
     padding: 20px;
     margin-top: 120px;
+    margin-bottom: 100px;
 }
 
 .panel {
@@ -150,6 +151,76 @@ span {
   margin-bottom: 50px;
 }
 
+/* gerente.component.css */
+
+/* Estilo para o Modal */
+.modal {
+  display: flex; /* Flexbox para centralizar */
+  justify-content: center; /* Alinha horizontalmente */
+  align-items: center; /* Alinha verticalmente */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7); /* Fundo escurecido */
+  z-index: 1000; /* Certifique-se de que o modal está acima de outros elementos */
+  cursor: pointer; /* Cursor de pointer para indicar que pode ser fechado clicando fora */
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  width: 80%; /* Ajuste a largura conforme necessário */
+  max-width: 500px; /* Limita a largura do modal */
+  max-height: 80vh; /* Limita a altura do modal */
+  overflow-y: auto; /* Adiciona rolagem vertical se o conteúdo for muito grande */
+}
+
+.modal-content::-webkit-scrollbar {
+  width: 10px;            /* heigth of the entire scrollbar */
+}
+
+.modal-content::-webkit-scrollbar-track {
+  background: rgb(0, 0, 0);        /* color of the tracking area */
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+  background-color: gold;    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+  border: 3px solid gold;  /* creates padding around scroll thumb */
+}
+
+li{
+  list-style: none;
+  margin-left: -30px;
+}
+
+.stars {
+  display: inline-block;
+}
+
+.star {
+  font-size: 20px; /* Ajuste o tamanho das estrelas */
+  color: gray; /* Cor padrão */
+}
+
+.star.filled {
+  color: gold; /* Cor das estrelas preenchidas */
+}
+
+.btn-ler{
+  margin: 0 10px 0 10px;
+  padding: 8px 16px;
+  background-color: rgb(245, 219, 71);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+
 /* Media Queries para Ajustes em Telas Menores */
 @media (max-width: 820px) {
     .dashboard {
@@ -194,7 +265,7 @@ span {
     .total-users {
         width: 100%; /* Faz com que a total-users ocupe 100% da largura */
         margin-bottom: 60px;
-        margin-top: 90px !important;
+        margin-top: 140px !important;
         margin-left: 0;
     }
 

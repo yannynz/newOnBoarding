@@ -9,7 +9,7 @@
             <div class="chart-container">
                 <h2>Avaliações</h2>
                 <canvas id="ratingsChart"></canvas>
-                <p>Ler todas</p>
+                <button class="btn-ler text-dark" (click)="loadFeedbacks()">Ler Todas</button>
             </div>
             <div class="total-users">
                 <h2>Total de Usuários</h2>
@@ -21,6 +21,23 @@
             </div>
         </div>
     </div>
+
+    <div class="modal" *ngIf="showModal" (click)="fecharModal($event)">
+    <div class="modal-content">
+      <h2>Avaliações</h2>
+      <ul>
+        <li *ngFor="let feedback of feedbacks">
+          <div class="feedback-item">
+            <div class="stars">
+              <span *ngFor="let star of [].constructor(feedback.rating); let i = index" class="star filled">★</span>
+              <span *ngFor="let star of [].constructor(5 - feedback.rating); let i = index" class="star">★</span>
+            </div>
+            <p>{{ feedback.comment }}</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
 
     <!-- Inputs de Pesquisa e Tabela de Usuários -->
 <div class="search-container container">

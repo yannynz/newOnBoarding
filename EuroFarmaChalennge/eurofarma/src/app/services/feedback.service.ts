@@ -44,6 +44,11 @@ searchUsers(name?: string, role?: string, email?: string, id?: number): Observab
   // Faz a requisição GET para o backend
   return this.http.get<any[]>(`${this.apiUrl}/search`, { params });
 }
+
+
+getAllFeedbacks(): Observable<Feedback[]> {
+  return this.http.get<Feedback[]>(`${this.apiUrl}/all`);
+}
 }
 
 

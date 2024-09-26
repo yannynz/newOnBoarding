@@ -82,5 +82,13 @@ public class FeedbackController {
         return ResponseEntity.ok(users);
     }
 
+    @GetMapping("/all")
+    public ResponseEntity<List<Feedback>> getAllFeedbacks() {
+        System.out.println("Chamando o método getAllFeedbacks()"); // Mensagem simples no console
+        List<Feedback> feedbacks = feedbackService.getAllFeedbacks(); // Lógica para obter todos os feedbacks
+        return ResponseEntity.ok(feedbacks);
+    }
+
+
 }
 

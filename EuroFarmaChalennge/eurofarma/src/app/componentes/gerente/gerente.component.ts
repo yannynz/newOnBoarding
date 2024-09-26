@@ -3,6 +3,7 @@ import { Chart, registerables } from 'chart.js';
 import { FeedbackService } from 'src/app/services/feedback.service';
 import { AuthService } from 'src/app/services/auth.service'; // Importe o AuthService
 import { User } from 'src/app/models/user.model';
+import { Feedback } from 'src/app/models/feedback.model';
 
 Chart.register(...registerables);
 
@@ -12,7 +13,6 @@ Chart.register(...registerables);
   styleUrls: ['./gerente.component.css']
 })
 export class GerenteComponent implements OnInit {
-
   totalUsers: number = 0; // Inicializa total de usuários como 0
   ratings: number[] = [0, 0, 0, 0, 0]; // Inicializa as avaliações (1 a 5 estrelas)
   rolesCount: { [key: string]: number } = {}; // Inicializa a contagem de roles como um objeto
@@ -33,6 +33,11 @@ export class GerenteComponent implements OnInit {
 
   currentPage: number = 1;
   pageSize: number = 10; // Número de usuários por página
+
+  feedbacks: Feedback[] = []; // Inicializa a lista de feedbacks
+  showModal: boolean = false; // Controle do modal
+
+
 
   constructor(private feedbackService: FeedbackService, private authService: AuthService) {} // Injete o AuthService
 
@@ -213,5 +218,23 @@ export class GerenteComponent implements OnInit {
   // Calcula o número total de páginas
   get totalPages(): number {
     return Math.ceil(this.users.length / this.pageSize);
+  }
+
+
+  //Carrega os Feedbacks
+  loadFeedbacks(): void {
+    this.feedbackService.getAllFeedbacks().subscribe(
+      (data) => {
+        this.feedbacks = data; // Armazena os feedbacks recebidos
+        this.showModal = true; // Exibe o modal
+      },
+      (error) => {
+        console.error('Erro ao buscar feedbacks:', error);
+      }
+    );
+  }
+
+  fecharModal(event?: MouseEvent): void {
+    this.showModal = false;
   }
 }

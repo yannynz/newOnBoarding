@@ -35,5 +35,9 @@ public class FeedbackService {
 
         return starCount;
     }
+
+    public List<Feedback> getAllFeedbacks() {
+        return feedbackRepository.findAll(); // Método para retornar todas as avaliações
+    }
 }
 
