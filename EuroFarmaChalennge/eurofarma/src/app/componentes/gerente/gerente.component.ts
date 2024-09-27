@@ -36,6 +36,7 @@ export class GerenteComponent implements OnInit {
 
   feedbacks: Feedback[] = []; // Inicializa a lista de feedbacks
   showModal: boolean = false; // Controle do modal
+  showModal2: boolean = false; // Controle do modal
 
 
 
@@ -236,5 +237,70 @@ export class GerenteComponent implements OnInit {
 
   fecharModal(event?: MouseEvent): void {
     this.showModal = false;
+    this.showModal2 = false;
   }
+
+  selectedUser: any = null;
+
+selectUser(user: any) {
+  this.selectedUser = user;
+  this.highlightSelectedUser();
+}
+
+editUser() {
+  if (this.selectedUser) {
+    this.showModal2 = true;
+    console.log('Usuário a ser editado:', this.selectedUser);
+  } else {
+    alert('Selecione um usuário para editar');
+  }
+}
+
+deleteUser() {
+  if (this.selectedUser) {
+    this.authService.deleteUser(this.selectedUser.id).subscribe(
+      () => {
+        console.log('Usuário excluído:', this.selectedUser);
+        this.selectedUser = null; // Limpa a seleção após a exclusão
+        this.searchUsers(); // Atualiza a lista de usuários
+      },
+      (error) => {
+        console.error('Erro ao excluir usuário:', error);
+      }
+    );
+  } else {
+    alert('Selecione um usuário para excluir');
+  }
+}
+
+highlightSelectedUser() {
+  const rows = document.querySelectorAll('.user-table tbody tr');
+  rows.forEach(row => {
+    row.classList.remove('selected');
+  });
+  if (this.selectedUser) {
+    const selectedRow = Array.from(rows).find(
+      row => row.children[0].textContent === String(this.selectedUser.id)
+    );
+    if (selectedRow) {
+      selectedRow.classList.add('selected');
+    }
+  }
+}
+
+saveChanges(): void {
+  if (this.selectedUser) {
+    // Lógica para salvar as alterações do usuário
+    this.authService.updateUser(this.selectedUser.id, this.selectedUser).subscribe(
+      (updatedUser) => {
+        console.log('Usuário atualizado:', updatedUser);
+        this.showModal2 = false; // Fecha o modal após salvar
+        this.searchUsers(); // Atualiza a lista de usuários
+      },
+      (error) => {
+        console.error('Erro ao atualizar usuário:', error);
+      }
+    );
+  }
+}
 }

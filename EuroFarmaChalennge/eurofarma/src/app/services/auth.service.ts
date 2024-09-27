@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -59,5 +60,14 @@ export class AuthService {
 
   updateFirstAccess(userId: number, firstAccess: boolean): Observable<any> {
     return this.http.put(`${this.apiUrl}/auth/${userId}/firstAccess`, { firstAccess });
+  }
+
+  updateUser(id: number, userDetails: User): Observable<User> {
+    return this.http.put<User>(`${this.apiUrl}/auth/${id}`, userDetails);
+  }
+
+  // Método para excluir o usuário
+  deleteUser(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/auth/${id}`);
   }
 }

@@ -90,5 +90,20 @@ public class UserService {
         return filteredUsers; // Retorna a lista de usuários filtrados
     }
 
+    public User updateUser(Long id, User userDetails) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("User not found with ID: " + id));
+
+        user.setName(userDetails.getName());
+        user.setEmail(userDetails.getEmail());
+        user.setRole(userDetails.getRole()); // Atualiza a role, se necessário
+
+        return userRepository.save(user);
+    }
+
+    public void deleteById(Long id) {
+        userRepository.deleteById(id);
+    }
+
 }
 

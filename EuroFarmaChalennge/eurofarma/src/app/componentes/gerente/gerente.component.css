@@ -72,12 +72,17 @@ span {
 }
 
 .search-input,
-.search-select {
+.search-select, .edit-input, .edit-select {
   padding: 10px;
   margin: 5px; /* Espaçamento lateral */
   width: calc(25% - 20px); /* Define uma largura fixa para os inputs */
   border-radius: 10px;
   border: 1px solid #cfcbcb;
+}
+
+.edit-input, .edit-select{
+  width: 100% !important;
+  margin: 10px 0 10px 0 !important;
 }
 
 .search-button {
@@ -149,6 +154,43 @@ span {
 
 .btn-pagina{
   margin-bottom: 50px;
+}
+
+/* Desativação dos botões de navegação de página */
+.btn-navegar:disabled {
+  background-color: #ccc; /* Cor de fundo quando desativado */
+  cursor: not-allowed; /* Cursor para indicar que está desativado */
+}
+
+.edit-button, .delete-button{
+  background-color: gold; /* Cor azul */
+  color: white; /* Cor do texto do botão */
+  border: none; /* Remove borda padrão */
+  padding: 10px 15px; /* Espaçamento interno */
+  border-radius: 10px; /* Bordas arredondadas */
+  cursor: pointer; /* Muda o cursor ao passar o mouse */
+  height: 47px;
+  margin-top: 3px;
+  margin-left: 5px;
+}
+
+.user-table tr.selected {
+  background-color: #cfe3ff; /* Cor de fundo para a linha selecionada */
+  color: #00488e; /* Cor do texto para a linha selecionada */
+}
+
+.user-table tr.selected:hover{
+  background-color: #cfe3ff; /* Cor de fundo para a linha selecionada */
+  color: #00488e; /* Cor do texto para a linha selecionada */
+}
+
+/* Alteração de cursor na linha da tabela */
+.user-table tr {
+  cursor: pointer;
+}
+
+.user-table tr:hover {
+  background-color: #e0e0e0; /* Fundo ao passar o mouse na linha */
 }
 
 /* gerente.component.css */
@@ -287,20 +329,33 @@ li{
       font-size: 23px;
     }
 
-    .search-container {
-      flex-direction: column; /* Empilha os itens verticalmente em telas pequenas */
-      align-items: center; /* Centraliza os itens verticalmente */
-  }
+  .search-container {
+    flex-direction: column; /* Mantém os itens empilhados verticalmente */
+    align-items: center; /* Centraliza os itens no mobile */
+    width: 100%; /* Garante que o container ocupe toda a largura */
+}
 
-  .search-input,
-  .search-select {
-      width: 100%; /* Ocupa 100% da largura em mobile */
-  }
+.search-input,
+.search-select {
+    width: 100%; /* Inputs ocupam 100% da largura em mobile */
+}
 
-  .search-button {
-      width: auto; /* Permite que o botão tenha largura dinâmica */
-      margin: 10px 0; /* Espaçamento acima e abaixo do botão */
-  }
+.search-button {
+    width: 100%; /* Botão de pesquisa ocupa 100% da largura em mobile */
+    margin-bottom: 10px; /* Espaçamento abaixo do botão */
+}
+
+/* Agrupa botões editar e excluir ao lado do botão de pesquisa */
+.edit-button, .delete-button {
+    width: 100%; /* Define largura de 50% para os botões */
+    margin: 5px; /* Adiciona margem para espaçamento entre eles */
+}
+
+/* Mantém a largura dos botões em layout desktop */
+.search-container .edit-button,
+.search-container .delete-button {
+    margin-top: 10px;
+}
 }
 
 /* Media Queries específicas para Tablets */
@@ -316,7 +371,7 @@ li{
     }
 
     .search-input,
-    .search-select {
+    .search-select, .edit-input, .edit-select {
         width: calc(25% - 20px); /* Mantém a largura original em telas maiores */
     }
 

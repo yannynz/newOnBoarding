@@ -49,9 +49,14 @@
       <option value="financeiro">Financeiro</option>
       <option value="gerente">Gerente</option>
   </select>
-  <input type="email" placeholder="E-mail" class="search-input" [(ngModel)]="searchEmail" />
+  <input type="email" placeholder="E-mail" class="search-input" [(ngModel)]="searchEmail"/>
   <input type="number" placeholder="ID" class="search-input" [(ngModel)]="searchId" />
+
   <button class="search-button" (click)="searchUsers()">Pesquisar</button>
+
+  <!-- Botões de Editar e Excluir -->
+  <button class="edit-button" (click)="editUser()"><i class="fa-solid fa-pencil"></i></button>
+  <button class="delete-button" (click)="deleteUser()"><i class="fa-solid fa-trash"></i></button>
 </div>
 
 <!-- Tabela de Usuários -->
@@ -66,7 +71,7 @@
           </tr>
       </thead>
       <tbody>
-          <tr *ngFor="let user of displayedUsers">
+          <tr *ngFor="let user of displayedUsers" (click)="selectUser(user)">
               <td>{{ user.id }}</td>
               <td>{{ user.name }}</td>
               <td>{{ user.email }}</td>
@@ -81,5 +86,33 @@
   <span class="text-dark">Página {{ currentPage }} de {{ totalPages }}</span>
   <button class="btn-navegar" (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">Próximo</button>
 </div>
+
+<div class="conteudo-pai">
+  <!-- Seu conteúdo anterior aqui -->
+
+  <!-- Modal -->
+  <div class="modal" *ngIf="showModal2" (click)="fecharModal($event)">
+      <div class="modal-content" (click)="$event.stopPropagation()">
+          <h2>Editar Usuário</h2>
+          <!-- Campos para edição -->
+          <label for="userName">Nome:</label>
+          <input type="text" id="userName" class="edit-input" [(ngModel)]="selectedUser.name" />
+
+          <label for="userEmail">E-mail:</label>
+          <input type="email" id="userEmail" class="edit-input" [(ngModel)]="selectedUser.email" />
+
+          <label for="userRole">Role:</label>
+          <select id="userRole" class="edit-select" [(ngModel)]="selectedUser.role">
+              <option value="admin">Admin</option>
+              <option value="ti">TI</option>
+              <option value="financeiro">Financeiro</option>
+              <option value="gerente">Gerente</option>
+          </select>
+
+          <button class="search-button" (click)="saveChanges()">Salvar</button>
+      </div>
+  </div>
+</div>
+
 
 </div>
